@@ -1,0 +1,7 @@
+{
+  "name": "SIMAKALApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
