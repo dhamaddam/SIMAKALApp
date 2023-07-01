@@ -10,37 +10,43 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class MenuPage implements OnInit {
 
   pages = [
+
     {
       title : 'Dashboard',
+      description : "Tampilan Utama Halaman Utama",
       url: '/menu/dashboard',
       icon: 'grid-outline'
     }, 
     {
-      title : 'Tanah',
-      url: '/menu/view-keragaan-tanah',
+      title : 'Input Alat Kesehatan',
+      description : "Membuat data yang belum pernah terdaftar di  sistem",
+      url: '/menu/input-alat-kesehatan',
+      icon: 'grid-outline'
+    }, 
+    {
+      title : 'Jadwal Kalibrasi',
+      description : "Lihat Seluruh Alat Terdaftar yang akan di jadwalkan kalibrasi" ,
+      url: '/menu/jadwal-kalibrasi',
       icon: 'globe-outline'
     }, 
     {
-      title:'Kondisi Lahan',
-      url: '/menu/view-keragaan-lahan',
+      title:'Monitoring Alat',
+      description : 'Lihat Seluruh Alat  Rusak, Sedang Perbaikan, Selesai Perbaikan dan Gagal Perbaikan',
+      url: '/menu/monitoring-alat',
       icon: 'filter-outline'
     },
     {
-      title:'Tanaman',
-      url: '/menu/view-keragaan-tanaman',
+      title:'Lihat Seluruh Alat',
+      description : "Laporan Berupa Grafik Persentase Keberhasilan  kalibrasi alat",
+      url: '/menu/seluruh-alat',
       icon: 'leaf-outline'
     },
     {
-      title:'Faktor Alam & Anomali',
-      url: '/menu/view-faktor-alam-anomali',
+      title:'Laporan',
+      description : "Laporan Berupa Grafik Persentase Keberhasilan  kalibrasi alat",
+      url: '/menu/generate-laporan',
       icon: 'earth-outline'
     },
-
-    {
-      title:'Manajemen Kebun',
-      url: '/menu/view-management-kebun',
-      icon: 'construct-outline'
-    }
 
   ];
 
@@ -55,27 +61,6 @@ export class MenuPage implements OnInit {
       url: '/menu/keragaan-tanah',
       icon: 'globe-outline'
     }, 
-    {
-      title:'Kondisi Lahan',
-      url: '/menu/keragaan-lahan',
-      icon: 'filter-outline'
-    },
-    {
-      title:'Tanaman',
-      url: '/menu/keragaan-tanaman',
-      icon: 'leaf-outline'
-    },
-    {
-      title:'Faktor Alam & Anomali',
-      url: '/menu/faktor-alam-anomali',
-      icon: 'earth-outline'
-    },
-
-    {
-      title:'Manajemen Kebun',
-      url: '/menu/management-kebun',
-      icon: 'construct-outline'
-    }
 
   ];
   constructor(
@@ -96,13 +81,20 @@ export class MenuPage implements OnInit {
       let data = JSON.parse(val)
 
       if (data.role_id == 2 ){ // rekomendator
-        this.pages = this.pages_rekomendator
+        this.pages = this.pages
       } else {
         this.pages = this.pages
       }
-      
     }
-
+  }
+  
+  logout(){
+    this.authServices.logout().then(() => {
+      this.navCtrl.navigateRoot('/login');
+    }).catch( e => 
+      { 
+        console.log(e);
+      })
   }
 
 }

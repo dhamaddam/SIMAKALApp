@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl : 'http://',
+  baseUrl : 'https://monitoring.d3vtb.cloud',
   key: '2c50ba44e05b7f619f26a2d87d2788a567650591'
 };
 

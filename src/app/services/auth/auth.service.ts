@@ -33,7 +33,7 @@ export class AuthService {
         console.log("result", result)
         this.setUserData(JSON.stringify(result))
         if (result.role_id == 2){
-          this.router.navigateByUrl('/menu/dashboard-rekomendator', { replaceUrl: true });
+          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else if (result.role_id == 3){
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else {

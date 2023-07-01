@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="md">
+      <ion-title>
+        {{ formTitle }}
+      </ion-title>
+      <ion-buttons slot="start">
+          <ion-menu-button autoHide="true"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-grid [fixed]="true">
+    <ion-row>
+      <ion-col size ="2" >No</ion-col>
+      <ion-col>Alat</ion-col>
+      <ion-col>Tanggal Kalibrasi</ion-col>
+      <ion-col>Jadwal</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid >
+    <ion-row *ngFor="let row of allContentDummy; index as i">
+      <ion-col size ="2">{{ i + 1 }}</ion-col>
+      <ion-col>{{ row?.name }}</ion-col>
+      <ion-col>{{ row?.country }}</ion-col>
+      <ion-col>
+        <ng-container [ngSwitch]="row?.status">
+          <ng-container *ngSwitchCase=1 [ngTemplateOutlet]="default"></ng-container>
+          <ng-container *ngSwitchCase=2 [ngTemplateOutlet]="masaWarning"></ng-container>
+          <ng-container *ngSwitchCase=3 [ngTemplateOutlet]="siapPakai"></ng-container>
+          <ng-container *ngSwitchCase=4 [ngTemplateOutlet]="Danger"></ng-container>
+      </ng-container>
+       
+        <ng-template #Danger>
+          <ion-button color="danger">Danger</ion-button>
+        </ng-template>
+
+        <ng-template #masaWarning>
+          <ion-button color="warning">Warning</ion-button>
+        </ng-template>
+        <ng-template #siapPakai>
+          <ion-button color="success">Pakai</ion-button>
+        </ng-template>
+
+        <ng-template #default>
+          <ion-button color="default">Default</ion-button>
+        </ng-template>
+        
+      </ion-col>
+   </ion-row>
+  </ion-grid>
+
+</ion-content>

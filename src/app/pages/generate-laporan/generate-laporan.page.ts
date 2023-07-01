@@ -3,56 +3,42 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Chart } from "chart.js/auto";
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { GlobalService } from 'src/app/services/global/global.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
+  selector: 'app-generate-laporan',
+  templateUrl: './generate-laporan.page.html',
+  styleUrls: ['./generate-laporan.page.scss'],
 })
-export class DashboardPage implements AfterViewInit, OnInit {
+export class GenerateLaporanPage implements  AfterViewInit, OnInit {
+
+
+  allpersentaseKalibrasiChartSub : Subscription = new Subscription;
+  allpersentaseKalibrasiChart : any[] = []
+
 
   @ViewChild("persentaseKalibrasiCanvas") persentaseKalibrasiCanvas: any;
-  
-  allpersentaseKalibrasiChartSub : Subscription = new Subscription;
-  allCompositionChart : any[] = []
-
-
-  constructor(
-    private authServices : AuthService,
-    private navCtrl: NavController
-  ) { 
-
-  }
-
+ 
+  formTitle = "Laporan"
   doughnutChart: any;
 
-  ngAfterViewInit() {
-    this.ComposisiChartMethod();
-  }
+  constructor(
+    private global : GlobalService,
+    private dashboarServices : DashboardService,
+ 
+  ) { }
+
   ngOnInit() {
-    this.check_login()
   }
-
-  async check_login (){
-
-    const val = await this.authServices.getId();
-    
-    if (val){
-      let data = JSON.parse(val)
-
-      if (data.role_id == 2 ){ // rekomendator
-        // this.pages = this.pages
-      } else {
-        // this.pages = this.pages
-      }
-    }
+  ngAfterViewInit() {
+    this.persentaseKalibrasiChartMethod();
   }
-
-  ComposisiChartMethod() {
+  persentaseKalibrasiChartMethod (){
     let composition_area : any[] = []
     let composition_label : any[] = []
 
-    this.allCompositionChart.forEach(data => {
+    this.allpersentaseKalibrasiChart.forEach(data => {
       composition_area.push(data.area)
       composition_label.push(data.category)
     })
@@ -94,14 +80,4 @@ export class DashboardPage implements AfterViewInit, OnInit {
       });
     } 
   }
-
-  logout(){
-    this.authServices.logout().then(() => {
-      this.navCtrl.navigateRoot('/login');
-    }).catch( e => 
-      { 
-        console.log(e);
-      })
-  }
-
 }

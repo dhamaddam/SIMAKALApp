@@ -16,6 +16,69 @@ export class DatabaseService {
     this.key = environment.key
    }
 
+   getViewListContent : any[] = [
+        {
+            "name": "Will Smith",
+            "gender": "Male",
+            "country": "USA",
+            "status" : 1
+        },
+        {
+            "name": "Jackline Joy",
+            "gender": "Female",
+            "country": "Sri Lanak",
+            "status" : 2
+        },
+        {
+            "name": "Alu Arjun",
+            "gender": "Male",
+            "country": "Microsoft",
+            "status" : 3
+        },
+        {
+            "name": "Kavitha Kumar",
+            "gender": "Female",
+            "country": "India",
+            "status" : 4
+        },
+        {
+            "name": "John Snow",
+            "gender": "Male",
+            "country": "United Kingdom",
+            "status" : 1
+        },
+        {
+            "name": "Priya kanana",
+            "gender": "Female",
+            "country": "India",
+            "status" : 2
+        },
+        {
+            "name": "Shri Devi",
+            "gender": "Female",
+            "country": "Sri Lanka",
+            "status" : 3
+        },
+        {
+            "name": "Richard Roy",
+            "gender": "Male",
+            "country": "France",
+            "status" : 4
+        },
+        {
+            "name": "Sonu Nigam",
+            "gender": "Male",
+            "country": "India",
+            "status" : 1
+        },
+        {
+            "name": "Priya Dutt",
+            "gender": "Female",
+            "country": "USA",
+            "status" : 2
+        }
+    ]
+
     // POST 
   getLogin(email : any, password: any) {
     let params = {

@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -30,6 +30,34 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'input-alat-kesehatan',
+    loadChildren: () => import('./pages/input-alat-kesehatan/input-alat-kesehatan.module').then( m => m.InputAlatKesehatanPageModule)
+  },
+  {
+    path: 'jadwal-kalibrasi',
+    loadChildren: () => import('./pages/jadwal-kalibrasi/jadwal-kalibrasi.module').then( m => m.JadwalKalibrasiPageModule)
+  },
+  {
+    path: 'monitoring-alat',
+    loadChildren: () => import('./pages/monitoring-alat/monitoring-alat.module').then( m => m.MonitoringAlatPageModule)
+  },
+  {
+    path: 'monitoring-alat',
+    loadChildren: () => import('./pages/monitoring-alat/monitoring-alat.module').then( m => m.MonitoringAlatPageModule)
+  },
+  {
+    path: 'seluruh-alat',
+    loadChildren: () => import('./pages/seluruh-alat/seluruh-alat.module').then( m => m.SeluruhAlatPageModule)
+  },
+  {
+    path: 'generate-laporan',
+    loadChildren: () => import('./pages/generate-laporan/generate-laporan.module').then( m => m.GenerateLaporanPageModule)
   },
 ];
 
