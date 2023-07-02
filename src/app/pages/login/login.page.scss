@@ -1,0 +1,50 @@
+.login-header{
+    background: var(--ion-color-success);
+    position: relative;
+    height: 220px;
+    border-radius: 0em;
+}
+.login-header::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: var(--ion-color-success);
+    border-bottom: 0;
+    margin-left: -15px;    
+
+}
+.logo-img{
+    display: block;
+    width: 120px;
+    padding-top: 50px;
+    margin: auto;
+    text-align: center;
+}
+
+[heading-coloumn-lr]{
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+[big-heading]{
+    margin-left: 40px;
+    font-family: "Heebo-Bold" !important;
+    font-size: 30px !important;
+    color: var(-ion-color-dark-contrast);
+}
+
+ion-label{
+    color: #000;
+    opacity: .8;
+    font-size: 13px;
+    display: block; 
+}
+
+ion-content{
+    --background: #fafafa;
+}

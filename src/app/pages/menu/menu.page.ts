@@ -21,31 +21,31 @@ export class MenuPage implements OnInit {
       title : 'Input Alat Kesehatan',
       description : "Membuat data yang belum pernah terdaftar di  sistem",
       url: '/menu/input-alat-kesehatan',
-      icon: 'grid-outline'
+      icon: 'add-circle-outline'
     }, 
     {
       title : 'Jadwal Kalibrasi',
       description : "Lihat Seluruh Alat Terdaftar yang akan di jadwalkan kalibrasi" ,
       url: '/menu/jadwal-kalibrasi',
-      icon: 'globe-outline'
+      icon: 'calendar-outline'
     }, 
     {
       title:'Monitoring Alat',
       description : 'Lihat Seluruh Alat  Rusak, Sedang Perbaikan, Selesai Perbaikan dan Gagal Perbaikan',
       url: '/menu/monitoring-alat',
-      icon: 'filter-outline'
+      icon: 'albums-outline'
     },
     {
       title:'Lihat Seluruh Alat',
       description : "Laporan Berupa Grafik Persentase Keberhasilan  kalibrasi alat",
       url: '/menu/seluruh-alat',
-      icon: 'leaf-outline'
+      icon: 'layers-outline'
     },
     {
       title:'Laporan',
       description : "Laporan Berupa Grafik Persentase Keberhasilan  kalibrasi alat",
       url: '/menu/generate-laporan',
-      icon: 'earth-outline'
+      icon: 'clipboard-outline'
     },
 
   ];

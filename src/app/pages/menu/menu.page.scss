@@ -1,3 +1,16 @@
 .active-item {
-    border-left: 8px solid var(--ion-color-primary);
+    text-align: center;
+    background-color: green;
+}
+ion-item.selected {
+    --background: var(--ion-color-success);
+    color: aliceblue;
+    text-align: center;
+  }
+
+h2{
+    font-weight: 300px;
+    color: white;
+    padding-left: 15px;
+    padding-top: 10px;
 }
