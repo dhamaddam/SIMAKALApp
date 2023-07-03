@@ -12,7 +12,7 @@ export class DatabaseService {
   constructor(
     public http: HttpClient
   ) {
-    this.baseUrl = environment.baseUrl + '/api/v1/'
+    this.baseUrl = environment.baseUrl + 'api/v1/'
     this.key = environment.key
    }
 
