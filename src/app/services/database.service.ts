@@ -79,7 +79,39 @@ export class DatabaseService {
         }
     ]
 
-    // POST 
+    getInstalasi : any[] = [
+      {
+          "id": "01",
+          "name": "IGD",
+          "full_name": "Instalasi Gawat Darurat",
+          "status" : 1
+      },
+      {
+        "id": "02",
+        "name": "HD",
+        "full_name": "Hemodialisis",
+        "status" : 1
+      },
+      {
+        "id": "03",
+        "name": "Patologi",
+        "full_name": "Patologi Klinik",
+        "status" : 1
+      },
+      {
+        "id": "04",
+        "name": "Rawat Inap Anggrek",
+        "full_name": "Rawat Inap Anggrek",
+        "status" : 1
+      }, 
+      {
+        "id": "05",
+        "name": "Poli Kebidanan",
+        "full_name": "Poli Kebidanan",
+        "status" : 1
+      },
+    ]
+  // POST 
   getLogin(email : any, password: any) {
     let params = {
       'email': email,
@@ -108,5 +140,37 @@ export class DatabaseService {
             reject(err);
         })
     })
+  }
+
+  getAllAlatKesehatan(id : string, uid : string){
+    let params = {
+      'id': id,
+      'uid' : uid
+    };
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'key': this.key
+      })
+    };
+
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl+'getAllAlatKesehatan', params, httpHeader).subscribe( result => {
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("password incorect!");
+            } else if (err.status == 404) { 
+              console.log("password or Username incorect!");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+    })
+
   }
 }

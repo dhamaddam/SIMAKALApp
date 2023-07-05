@@ -9,6 +9,10 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class MenuPage implements OnInit {
 
+
+  username : string = ""
+  role_name : string = ""
+
   pages = [
 
     {
@@ -79,11 +83,14 @@ export class MenuPage implements OnInit {
     
     if (val){
       let data = JSON.parse(val)
-
       if (data.role_id == 2 ){ // rekomendator
         this.pages = this.pages
+        this.username = data.name
+        this.role_name = data.role_name
       } else {
         this.pages = this.pages
+        this.username = data.name
+        this.role_name = data.role_name
       }
     }
   }
