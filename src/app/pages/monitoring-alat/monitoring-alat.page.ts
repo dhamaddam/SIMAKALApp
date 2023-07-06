@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GlobalService } from 'src/app/services/global/global.service';
 import { MonitoringAlatService } from 'src/app/services/monitoring-alat/monitoring-alat.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-monitoring-alat',
@@ -10,6 +11,8 @@ import { MonitoringAlatService } from 'src/app/services/monitoring-alat/monitori
 })
 export class MonitoringAlatPage implements OnInit {
 
+
+  param: any;
   formTitle = "Monitoring Alat"
   allContentDummy : any[] = [];
   allContentDummySub : Subscription = new Subscription;
@@ -17,7 +20,10 @@ export class MonitoringAlatPage implements OnInit {
 
   constructor(
     private global : GlobalService,
-    private monitoringAlatServices : MonitoringAlatService
+    private monitoringAlatServices : MonitoringAlatService,
+    private router: Router, 
+    private activatedRoute: ActivatedRoute, 
+
   ) { 
 
   }
@@ -43,6 +49,16 @@ export class MonitoringAlatPage implements OnInit {
       this.global.hideLoader();
     }, 1000);
   }
+  handleClick (event : any, param : string){
+    this.router.navigate(['details-monitoring'], {
+      queryParams: {
+        param: param
+      }
+    });
+  }
+
+  
+
   ngOnDestroy() {
     if(this.allContentDummySub) this.allContentDummySub.unsubscribe();
    }

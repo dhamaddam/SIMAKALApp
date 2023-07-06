@@ -8,16 +8,13 @@
           margin-left: -18px; margin-top: -58px; margin-bottom: 60px; width: 350px; box-shadow: 8px 1px 10px; background-color: green;">
           </div>
           
-          <div style="position: absolute; top: 38px; left: 15px; display: flex; align-items: center;">
+        <div style="position: absolute; top: 38px; left: 15px; display: flex; align-items: center;">
             <ion-label>
                 <h2>{{username}}</h2>
             <h2>{{role_name}}</h2>
             </ion-label>
         </div>
-         
-
-
-          <ion-list>
+        <ion-list>
               <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
                   <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="selected">
                       <ion-icon name="{{p.icon}}" slot="start"></ion-icon>
@@ -30,7 +27,7 @@
                   <ion-icon name="log-out-outline" slot="start"></ion-icon>
                   <ion-button expand="full" (click)="logout()" color="success">Logout</ion-button>
               </ion-item>
-          </ion-list>
+        </ion-list>
       </ion-content>
   </ion-menu>
   <ion-router-outlet id="content"></ion-router-outlet>

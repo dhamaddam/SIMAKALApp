@@ -14,7 +14,6 @@ export class MenuPage implements OnInit {
   role_name : string = ""
 
   pages = [
-
     {
       title : 'Dashboard',
       description : "Tampilan Utama Halaman Utama",
@@ -83,14 +82,14 @@ export class MenuPage implements OnInit {
     
     if (val){
       let data = JSON.parse(val)
-      if (data.role_id == 2 ){ // rekomendator
+      if (data.status == 1 ){ // rekomendator
         this.pages = this.pages
-        this.username = data.name
-        this.role_name = data.role_name
+        this.username = data.username
+        this.role_name = "superAdmin"
       } else {
         this.pages = this.pages
         this.username = data.name
-        this.role_name = data.role_name
+        this.role_name = "Instalasi"
       }
     }
   }

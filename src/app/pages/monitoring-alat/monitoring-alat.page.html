@@ -21,10 +21,10 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid>
+  <ion-grid *ngFor="let row of allContentDummy; index as i">
 
-    <ion-row *ngFor="let row of allContentDummy; index as i">
-      <ion-col size ="2">{{ i + 1 }}</ion-col>
+    <ion-row  (click)="handleClick($event,row.id)">
+      <ion-col size ="2" >{{ i + 1 }}</ion-col>
       <ion-col>{{ row?.name }}</ion-col>
       <ion-col>{{ row?.country }}</ion-col>
       <ion-col>
@@ -36,11 +36,10 @@
       </ng-container>
        
         <ng-template #Danger>
-          <ion-button size="small" color="danger">Danger</ion-button>
+          <ion-button size="small" color="danger" >Danger</ion-button>
         </ng-template>
-
         <ng-template #masaWarning>
-          <ion-button size="small" color="warning">Warning</ion-button>
+          <ion-button size="small" color="warning" >Warning</ion-button>
         </ng-template>
         <ng-template #siapPakai>
           <ion-button size="small" color="success">Pakai</ion-button>

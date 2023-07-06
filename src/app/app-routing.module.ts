@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'generate-laporan',
     loadChildren: () => import('./pages/generate-laporan/generate-laporan.module').then( m => m.GenerateLaporanPageModule)
   },
+  {
+    path: 'details-monitoring',
+    loadChildren: () => import('./pages/details-monitoring/details-monitoring.module').then( m => m.DetailsMonitoringPageModule)
+  },
 ];
 
 @NgModule({
