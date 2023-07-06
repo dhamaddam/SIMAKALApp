@@ -23,23 +23,26 @@ export class AuthService {
     await loading.present();
 
     this.DB.getLogin(email, password).then (async (res : any) => {
-      console.log("isi auth service",res);
+      
       const data = JSON.parse(res)
-      console.log(data.status)
+      console.log("response", data.meta.status)
 
       if(data.status == true){ 
         await loading.dismiss();
         let result =  data.data
         console.log("result", result)
         this.setUserData(JSON.stringify(result))
-        if (result.role_id == 2){
+        if (result.role == "USER"){
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
-        } else if (result.role_id == 3){
+        } else if (result.role == "ADMINISTRATOR"){
+          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
+        } else if (result.role == "INSTALASI"){ 
+          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
+        } else if (result.role == "BPFK"){ 
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else {
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         }
-       
       }
       else if (data.status == false){
         this.router.navigateByUrl('/login', { replaceUrl: true });

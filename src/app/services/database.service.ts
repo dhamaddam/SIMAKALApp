@@ -12,7 +12,7 @@ export class DatabaseService {
   constructor(
     public http: HttpClient
   ) {
-    this.baseUrl = environment.baseUrl + 'api/v1/'
+    this.baseUrl = environment.baseUrl + 'api/'
     this.key = environment.key
    }
 
@@ -130,7 +130,7 @@ export class DatabaseService {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'key': this.key
+        'x-api-key': this.key
       })
     };
     return new Promise((resolve, reject) => {

@@ -19,7 +19,7 @@ export class DetailsMonitoringPage implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(async params => {
       console.log(params['param'],'isi ')
-      this.param =params['param'];
+      this.param = params['param'];
     }, async err => {
       console.log(err)
       // await loading.dismiss();
