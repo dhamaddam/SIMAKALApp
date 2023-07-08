@@ -27,10 +27,6 @@
 
                   <ion-select formControlName="pilih_instalasi" placeholder="Silahkan Masukkan Instalasi" (ionChange)="handleInstalasi($event)" fill="outline">
                       <ion-select-option *ngFor="let instalasi of allInstalasi" value="{{instalasi?.id}}">{{instalasi?.name}}</ion-select-option>
-
-                  <ion-select interface="action-sheet" formControlName="pilih_instalasi" placeholder="Pilih Instalasi" (ionChange)="handleInstalasi($event)">
-                      <ion-select-option *ngFor="let instalasi of allInstalasi" value="{{instalasi?.name}}">{{instalasi?.name}}</ion-select-option>
-
                   </ion-select>
               </ion-item>
           </ion-list>
@@ -63,9 +59,6 @@
       </ion-grid>  
         
       <ion-grid>
-        <ion-row>
-          <ion-col>
-
       <ion-row>
         <ion-col>
           <ion-label class="ctm-font-2">Nama Alat</ion-label>
@@ -78,8 +71,7 @@
             <ion-label  class="ctm-font-2">Nomor Seri</ion-label>
             <ion-item>
                 <ion-item>
-                    <ion-input formControlName="nomer_seri" >
-                    </ion-input>
+                    <ion-input  type="text" formControlName="nomer_seri"></ion-input>
                 </ion-item>
             </ion-item>
         </ion-col>
@@ -107,10 +99,6 @@
           <ion-list>
             <ion-label class="ctm-font-2">Kondisi Alat</ion-label>
               <ion-item>
-
-                  <ion-select formControlName="kondisi_alat" placeholder="Pilih Kondisi Alat Sekarang" (ionChange)="handleInstalasi($event)">
-                      <ion-select-option *ngFor="let kondisiAlat of allKondisiAlat" value="{{kondisiAlat?.id}}">{{kondisiAlat?.name}}</ion-select-option>
-
                   <ion-select interface="action-sheet" formControlName="kondisi_alat" placeholder="Kondisi Alat" (ionChange)="handleInstalasi($event)" style="padding-top: 20px;">
                       <ion-select-option value="layak_pakai">Layak Pakai</ion-select-option>
                       <ion-select-option value="sedang_dalam_perbaikan">Sedang Dalam Perbaikan</ion-select-option>
