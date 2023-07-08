@@ -15,8 +15,7 @@ export class DashboardPage implements AfterViewInit, OnInit {
   
   allpersentaseKalibrasiChartSub : Subscription = new Subscription;
   allCompositionChart : any[] = []
-
-
+  formTitle = "Dashboard"
   constructor(
     private authServices : AuthService,
     private navCtrl: NavController

@@ -21,30 +21,28 @@ export class AuthService {
     
     const loading = await this.loadingController.create();
     await loading.present();
-
+      
     this.DB.getLogin(email, password).then (async (res : any) => {
       
       const data = JSON.parse(res)
-      console.log("response", data.meta.status)
-
-      if(data.status == true){ 
+      if(data.meta.status == 'success'){ 
         await loading.dismiss();
-        let result =  data.data
+        let result =  data.data.user
         console.log("result", result)
         this.setUserData(JSON.stringify(result))
         if (result.role == "USER"){
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else if (result.role == "ADMINISTRATOR"){
-          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
+          this.router.navigateByUrl('/menu/dashboard-administrator', { replaceUrl: true });
         } else if (result.role == "INSTALASI"){ 
-          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
+          this.router.navigateByUrl('/menu/dashboard-instalasi', { replaceUrl: true });
         } else if (result.role == "BPFK"){ 
-          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
+          this.router.navigateByUrl('/menu/dashboard-bpfk', { replaceUrl: true });
         } else {
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         }
       }
-      else if (data.status == false){
+      else if (data.meta.status == 'error'){
         this.router.navigateByUrl('/login', { replaceUrl: true });
       }
       else {
