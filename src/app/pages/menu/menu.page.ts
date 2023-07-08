@@ -53,18 +53,31 @@ export class MenuPage implements OnInit {
 
   ];
 
-  pages_rekomendator = [
+  pages_instalasi = [
     {
       title : 'Dashboard',
-      url: '/menu/dashboard-rekomendator',
+      description : "Tampilan Utama Halaman Utama",
+      url: '/menu/dashboard',
       icon: 'grid-outline'
     }, 
     {
-      title : 'Tanah',
-      url: '/menu/keragaan-tanah',
-      icon: 'globe-outline'
+      title:'Lihat Seluruh Alat',
+      description : "Laporan Berupa Grafik Persentase Keberhasilan  kalibrasi alat",
+      url: '/menu/seluruh-alat',
+      icon: 'layers-outline'
+    },
+    {
+      title : 'Jadwal Kalibrasi',
+      description : "Lihat Seluruh Alat Terdaftar yang akan di jadwalkan kalibrasi" ,
+      url: '/menu/jadwal-kalibrasi',
+      icon: 'calendar-outline'
     }, 
-
+    {
+      title:'Monitoring Alat',
+      description : 'Lihat Seluruh Alat  Rusak, Sedang Perbaikan, Selesai Perbaikan dan Gagal Perbaikan',
+      url: '/menu/monitoring-alat',
+      icon: 'albums-outline'
+    },
   ];
   constructor(
     private authServices : AuthService,
@@ -82,11 +95,17 @@ export class MenuPage implements OnInit {
     
     if (val){
       let data = JSON.parse(val)
-      if (data.status == 1 ){ // rekomendator
+      if (data.role == "USER" ){ // rekomendator
         this.pages = this.pages
         this.username = data.username
         this.role_name = "superAdmin"
-      } else {
+      } else if (data.role == "INSTALASI"){
+        this.pages = this.pages_instalasi
+        this.username = data.username
+        this.role_name = "Instalasi"
+      }
+
+      else {
         this.pages = this.pages
         this.username = data.name
         this.role_name = "Instalasi"
