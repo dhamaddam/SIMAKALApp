@@ -35,7 +35,7 @@ export class AuthService {
         } else if (result.role == "ADMINISTRATOR"){
           this.router.navigateByUrl('/menu/dashboard-administrator', { replaceUrl: true });
         } else if (result.role == "INSTALASI"){ 
-          this.router.navigateByUrl('/menu/dashboard-instalasi', { replaceUrl: true });
+          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else if (result.role == "BPFK"){ 
           this.router.navigateByUrl('/menu/dashboard-bpfk', { replaceUrl: true });
         } else {
