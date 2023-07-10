@@ -28,6 +28,9 @@ export class AuthService {
       if(data.meta.status == 'success'){ 
         await loading.dismiss();
         let result =  data.data.user
+        result.access_token = data.data.access_token
+        result.token_type = data.data.token_type
+
         console.log("result", result)
         this.setUserData(JSON.stringify(result))
         if (result.role == "USER"){

@@ -24,7 +24,6 @@
           <ion-list>
             <ion-label class="ctm-font-2">Pilih Instalasi</ion-label>
               <ion-item>
-
                   <ion-select formControlName="pilih_instalasi" placeholder="Silahkan Masukkan Instalasi" (ionChange)="handleInstalasi($event)" fill="outline">
                       <ion-select-option *ngFor="let instalasi of allInstalasi" value="{{instalasi?.id}}">{{instalasi?.name}}</ion-select-option>
                   </ion-select>
@@ -61,10 +60,13 @@
       <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-label class="ctm-font-2">Nama Alat</ion-label>
-          <ion-item>
-              <ion-input type="text" formControlName="nama_alat"></ion-input>
-          </ion-item>
+          <ion-select formControlName="pic" placeholder="PIC" (ionChange)="handleInstalasi($event)" fill="outline">
+            <ion-select-option  value="ka.igd">Ka. IGD</ion-select-option>
+            <ion-select-option  value="ka.pk">Ka. PK</ion-select-option>
+            <ion-select-option  value="ka.anggrek">Ka. Anggrek </ion-select-option>
+            <ion-select-option  value="ka.hd">Ka. HD</ion-select-option>
+            <ion-select-option  value="ka.poli_kebidanan">Ka. Poli Kebidanan</ion-select-option>
+          </ion-select>
         </ion-col>
         <ion-col style="text-align: left;">
 
@@ -111,6 +113,37 @@
           </ion-list>
         </ion-col>
       </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-label class="ctm-font-2">Status Kalibrasi</ion-label>
+              <ion-item>
+                  <ion-select interface="action-sheet" formControlName="calibration_status" placeholder="Status Kalibrasi" (ionChange)="handleInstalasi($event)" style="padding-top: 20px;">
+                      <ion-select-option value="layak_pakai">Layak Pakai</ion-select-option>
+                      <ion-select-option value="tidak_layak_pakai">Tidak Layak Pakai</ion-select-option>
+                  </ion-select>
+              </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-label class="ctm-font-2">Kepemilikan</ion-label>
+              <ion-item>
+                  <ion-select interface="action-sheet" formControlName="owner" placeholder="Kepemilikan" (ionChange)="handleInstalasi($event)" style="padding-top: 20px;">
+                      <ion-select-option value="1">RSUD Dr Pirngadi</ion-select-option>
+                      <ion-select-option value="2">PT Saba Indomedika</ion-select-option>
+                      <ion-select-option value="3">PT Enseval Medika Prima</ion-select-option>
+                      <ion-select-option value="4">Pt Mendjangan</ion-select-option>
+                  </ion-select>
+              </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
     </ion-grid>
               
 

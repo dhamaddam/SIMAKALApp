@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Alat } from '../models/alat.model';
+import { AuthService } from './auth/auth.service';
+import { StorageService } from './storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,8 @@ export class DatabaseService {
   key: string;
 
   constructor(
-    public http: HttpClient
+    public http: HttpClient,
+    private storage: StorageService,
   ) {
     this.baseUrl = environment.baseUrl + 'api/'
     this.key = environment.key
@@ -152,6 +156,36 @@ export class DatabaseService {
     })
   }
 
+  getNotification(id_kar : string) {
+    let params = {
+      'id_kar': id_kar
+    };
+
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key
+      })
+    };
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl+'notification', params, httpHeader).subscribe( result => {
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("password incorect!");
+            } else if (err.status == 404) { 
+              console.log("password or Username incorect!");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+    })
+  }
+
   getAllAlatKesehatan(id : string, uid : string){
     let params = {
       'id': id,
@@ -160,7 +194,7 @@ export class DatabaseService {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'key': this.key
+        'x-api-key': this.key
       })
     };
 
@@ -181,6 +215,37 @@ export class DatabaseService {
             reject(err);
         })
     })
+
+  }
+
+  saveInputAlatKesehatan(data : Alat[], token : string){
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    console.log("data saveInputAlatKesehatan",data[0])
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl+'medicalDevice/create', data[0], httpHeader).subscribe(result => {
+        //console.log(res.data);
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            // reject(err);
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("key incorect!");
+            } else if (err.status == 404) { 
+              console.log("Not Found");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+      })
 
   }
 }
