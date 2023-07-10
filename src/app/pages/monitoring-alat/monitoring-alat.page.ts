@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { GlobalService } from 'src/app/services/global/global.service';
 import { MonitoringAlatService } from 'src/app/services/monitoring-alat/monitoring-alat.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-monitoring-alat',
@@ -18,17 +19,25 @@ export class MonitoringAlatPage implements OnInit {
   allContentDummySub : Subscription = new Subscription;
   isLoading: boolean = false;
 
+  allAlatData : any[] = [];
+  allAlatDataSub : Subscription = new Subscription;
+ 
+
+  token : any; 
+
   constructor(
     private global : GlobalService,
     private monitoringAlatServices : MonitoringAlatService,
     private router: Router, 
     private activatedRoute: ActivatedRoute, 
-
+    private authServices : AuthService,
+  
   ) { 
 
   }
 
   ngOnInit() {
+    this.getAuth();
     this.allContentDummySub = this.monitoringAlatServices.allContentDummy.subscribe(data => {
       if (data instanceof Array){
         this.allContentDummy = data;
@@ -37,7 +46,26 @@ export class MonitoringAlatPage implements OnInit {
       }
     })
 
+    this.allAlatDataSub = this.monitoringAlatServices.allDataAlatKesehatan.subscribe(data => {
+      if (data instanceof Array){
+        this.allAlatData = data;
+      } else {
+        this.allAlatData = this.allAlatData.concat(data);
+      }
+    })
+
     this.getAllData()
+  }
+
+  async getAuth(){
+    const val = await this.authServices.getId();
+    
+    if(val){
+      let data = JSON.parse(val)
+
+      console.log("this.token", data.access_token)
+      this.token = data.access_token
+    }
   }
 
   async getAllData (){
@@ -45,10 +73,12 @@ export class MonitoringAlatPage implements OnInit {
     this.global.showLoader();
     setTimeout(async() => {
       await this.monitoringAlatServices.getContentDummy();
+      await this.monitoringAlatServices.getSeluruhAlatData(this.token);
       this.isLoading = false;
       this.global.hideLoader();
     }, 1000);
   }
+
   handleClick (event : any, param : string){
     this.router.navigate(['details-monitoring'], {
       queryParams: {

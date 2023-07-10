@@ -8,6 +8,7 @@ import { DatabaseService } from '../database.service';
 export class MonitoringAlatService {
 
   private _allContentDummy = new BehaviorSubject<any>(null)
+  private _allDataAlatKesehatan = new BehaviorSubject<any>(null)
 
   constructor(
     private api : DatabaseService
@@ -15,6 +16,10 @@ export class MonitoringAlatService {
 
   get allContentDummy(){
     return this._allContentDummy.asObservable();
+  }
+
+  get allDataAlatKesehatan(){
+    return this._allDataAlatKesehatan.asObservable();
   }
 
   getContentDummy(){
@@ -26,5 +31,15 @@ export class MonitoringAlatService {
       throw(error)
     }
   }
-
+  async getSeluruhAlatData(token : string) {
+    try {
+      let getSeluruhAlat : any = this.api.getAllAlatKesehatan('1',token).then(async (params : any) =>{
+        const data = JSON.parse(params)
+        await this._allDataAlatKesehatan.next(data.data)
+      } )
+    } catch (error){
+      console.log(error)
+      throw(error)
+    }
+  }
 }

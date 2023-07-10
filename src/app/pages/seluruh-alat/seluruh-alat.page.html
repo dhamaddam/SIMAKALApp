@@ -16,25 +16,28 @@
     <ion-row>
       <ion-col size ="2" >No</ion-col>
       <ion-col>Alat</ion-col>
-      <ion-col>Tanggal Kalibrasi</ion-col>
-      <ion-col>Jadwal</ion-col>
+       <ion-col>Status</ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid >
-    <ion-row *ngFor="let row of allContentDummy; index as i">
+    <ion-row *ngFor="let row of allAlatData; index as i">
       <ion-col size ="2">{{ i + 1 }}</ion-col>
       <ion-col>{{ row?.name }}</ion-col>
-      <ion-col>{{ row?.country }}</ion-col>
-      <ion-col>
-        <ng-container [ngSwitch]="row?.status">
-          <ng-container *ngSwitchCase=1 [ngTemplateOutlet]="default"></ng-container>
-          <ng-container *ngSwitchCase=2 [ngTemplateOutlet]="masaWarning"></ng-container>
-          <ng-container *ngSwitchCase=3 [ngTemplateOutlet]="siapPakai"></ng-container>
-          <ng-container *ngSwitchCase=4 [ngTemplateOutlet]="Danger"></ng-container>
+       <ion-col>
+        <ng-container [ngSwitch]="row?.monitoring_status">
+          <ng-container *ngSwitchCase=null [ngTemplateOutlet]="default"></ng-container>
+          <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
+          <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
+          <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
+          <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
       </ng-container>
        
         <ng-template #Danger>
           <ion-button size="small" color="danger">Danger</ion-button>
+        </ng-template>
+        
+        <ng-template #sedangDalamPerbaikan>
+          <ion-button size="small" color="danger">Dalam Perbaikan</ion-button>
         </ng-template>
 
         <ng-template #masaWarning>

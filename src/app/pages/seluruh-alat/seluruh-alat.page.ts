@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { GlobalService } from 'src/app/services/global/global.service';
 import { SeluruhAlatService } from 'src/app/services/seluruh-alat/seluruh-alat.service';
 
@@ -14,35 +15,54 @@ export class SeluruhAlatPage implements OnInit {
   allContentDummy : any[] = [];
   allContentDummySub : Subscription = new Subscription;
   isLoading: boolean = false;
+  allAlatData : any[] = [];
+  allAlatDataSub : Subscription = new Subscription;
   
+  token : any; 
+
   constructor(
     private global : GlobalService,
-    private seluruhAlatServices : SeluruhAlatService
- 
+    private seluruhAlatServices : SeluruhAlatService,
+    private authServices : AuthService,
   ) { }
 
   ngOnInit() {
-    this.allContentDummySub = this.seluruhAlatServices.allContentDummy.subscribe(data => {
+
+    this.getAuth();
+    
+    this.allAlatDataSub = this.seluruhAlatServices.allDataAlatKesehatan.subscribe(data => {
       if (data instanceof Array){
-        this.allContentDummy = data;
+        this.allAlatData = data;
       } else {
-        this.allContentDummy = this.allContentDummy.concat(data);
+        this.allAlatData = this.allAlatData.concat(data);
       }
     })
 
     this.getAllData()
   }
 
+  async getAuth(){
+    const val = await this.authServices.getId();
+    
+    if(val){
+      let data = JSON.parse(val)
+
+      console.log("this.token", data.access_token)
+      this.token = data.access_token
+    }
+  }
+
   async getAllData (){
     this.isLoading = true;
     this.global.showLoader();
     setTimeout(async() => {
-      await this.seluruhAlatServices.getContentDummy();
+      await this.seluruhAlatServices.getSeluruhAlatData(this.token);
       this.isLoading = false;
       this.global.hideLoader();
     }, 1000);
   }
   ngOnDestroy() {
     if(this.allContentDummySub) this.allContentDummySub.unsubscribe();
+    if(this.allAlatDataSub) this.allAlatDataSub.unsubscribe();
    }
 }

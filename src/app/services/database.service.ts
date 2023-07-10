@@ -186,20 +186,21 @@ export class DatabaseService {
     })
   }
 
-  getAllAlatKesehatan(id : string, uid : string){
+  getAllAlatKesehatan(id : string, token : string){
     let params = {
       'id': id,
-      'uid' : uid
     };
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'x-api-key': this.key
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+
       })
     };
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.baseUrl+'getAllAlatKesehatan', params, httpHeader).subscribe( result => {
+      this.http.get(this.baseUrl+'medicalDevice',httpHeader).subscribe( result => {
         resolve(JSON.stringify(result))
       },
         err => {
