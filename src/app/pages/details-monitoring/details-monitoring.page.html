@@ -11,19 +11,25 @@
 
 <ion-content class="ion-padding" [fullscreen]="true">
   
-  <ion-card>
-    <ion-card-header>
-       Persentase Alat Terkalibrasi
-    </ion-card-header>
-  </ion-card>
 
+  <ion-list>
+    <ion-item>
+      <ion-select label="Leukimia Phanotyping" >
+                      <ion-select-option value="1">Suction Pump</ion-select-option>
+                      <ion-select-option value="2">Blood Pressure Monitor</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-card> 
+    <ion-card-header>Status</ion-card-header>
   <ion-row >
         <ion-grid>
           <ion-row class="ion-justify-content-center">
           <ion-avatar>
             <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
           </ion-avatar>
-          <ion-label color="tertiary" class="ion-text-center">Label</ion-label>
+          <ion-label color="success" class="ion-text-center">Layak Pakai</ion-label>
         </ion-row>
       </ion-grid>
       
@@ -32,7 +38,7 @@
             <ion-avatar>
               <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
             </ion-avatar>
-            <ion-label color="warning" class="ion-text-center">Label</ion-label>
+            <ion-label color="warning" class="ion-text-center">Dalam Perbaikan</ion-label>
           </ion-row>
         </ion-grid>
 
@@ -41,7 +47,7 @@
             <ion-avatar>
               <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
             </ion-avatar>
-            <ion-label color="success" class="ion-text-center">Label</ion-label>
+            <ion-label color="primary" class="ion-text-center">Selesai Perbaikan</ion-label>
           </ion-row>
         </ion-grid>
 
@@ -50,10 +56,76 @@
             <ion-avatar>
               <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
             </ion-avatar>
-            <ion-label color="primary">Label</ion-label>
+            <ion-label color="danger">Gagal Perbaikan</ion-label>
           </ion-row>
         </ion-grid>
   </ion-row>
+</ion-card>
 
-  
+<ion-grid>
+  <ion-row>
+      <ion-col>
+          <ion-label>Instalasi</ion-label>
+          <ion-item>
+            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
+          </ion-item>
+      </ion-col>
+  </ion-row>
+ </ion-grid> 
+
+ <ion-grid>
+  <ion-row>
+      <ion-col>
+          <ion-label>Nama Alat</ion-label>
+          <ion-item>
+            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
+          </ion-item>
+      </ion-col>
+  </ion-row>
+ </ion-grid> 
+
+ <ion-grid>
+  <ion-row>
+      <ion-col>
+          <ion-label>Nomor Seri</ion-label>
+          <ion-item>
+            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
+          </ion-item>
+      </ion-col>
+  </ion-row>
+ </ion-grid> 
+
+ <ion-grid>
+  <ion-row>
+      <ion-col>
+          <ion-label>Nomor Inventaris</ion-label>
+          <ion-item>
+            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
+          </ion-item>
+      </ion-col>
+  </ion-row>
+ </ion-grid> 
+
+ <ion-grid>
+  <ion-row>
+      <ion-col>
+          <ion-label>Merk Type</ion-label>
+          <ion-item>
+            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
+          </ion-item>
+      </ion-col>
+  </ion-row>
+ </ion-grid> 
+
+ <ion-grid>
+  <ion-row>
+      <ion-col>
+          <ion-label>Kalibrasi Awal</ion-label>
+          <ion-item>
+            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
+          </ion-item>
+      </ion-col>
+  </ion-row>
+ </ion-grid> 
+
 </ion-content>
