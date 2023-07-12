@@ -14,20 +14,22 @@
 
   <ion-list>
     <ion-item>
-      <ion-select label="Leukimia Phanotyping" >
-                      <ion-select-option value="1">Suction Pump</ion-select-option>
-                      <ion-select-option value="2">Blood Pressure Monitor</ion-select-option>
+      <ion-select interface="action-sheet" placeholder="Leukimia Phanotyping">
+          <ion-select-option value="suction_pump">Suction Pump</ion-select-option>
+          <ion-select-option value="blood_pressure_monitor">Blood Pressure Monitor</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
   <ion-card> 
-    <ion-card-header>Status</ion-card-header>
+    <ion-card-header> 
+      STATUS  :
+    </ion-card-header>
   <ion-row >
         <ion-grid>
           <ion-row class="ion-justify-content-center">
           <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <ion-icon name="checkmark-circle" color="success"></ion-icon>
           </ion-avatar>
           <ion-label color="success" class="ion-text-center">Layak Pakai</ion-label>
         </ion-row>
@@ -36,7 +38,7 @@
         <ion-grid>
           <ion-row class="ion-justify-content-center">
             <ion-avatar>
-              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <ion-icon name="construct" color="warning"></ion-icon>
             </ion-avatar>
             <ion-label color="warning" class="ion-text-center">Dalam Perbaikan</ion-label>
           </ion-row>
@@ -45,7 +47,7 @@
         <ion-grid>
           <ion-row class="ion-justify-content-center">
             <ion-avatar>
-              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <ion-icon name="thumbs-up-sharp" color="primary"></ion-icon>
             </ion-avatar>
             <ion-label color="primary" class="ion-text-center">Selesai Perbaikan</ion-label>
           </ion-row>
@@ -54,7 +56,7 @@
         <ion-grid>
           <ion-row class="ion-justify-content-center">
             <ion-avatar>
-              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <ion-icon name="close-circle-sharp" color="danger"></ion-icon>
             </ion-avatar>
             <ion-label color="danger">Gagal Perbaikan</ion-label>
           </ion-row>
