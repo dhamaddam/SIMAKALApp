@@ -249,4 +249,42 @@ export class DatabaseService {
       })
 
   }
+
+  // updateOneSignal
+
+  updateOneSignal(idDevice: string ,token : string){
+    console.log("updateOneSignal idDevice",idDevice)
+    let params = {
+      'one_signal': idDevice,
+    };
+
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    console.log("data saveInputAlatKesehatan")
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl+'updateOneSignal', params, httpHeader).subscribe(result => {
+        //console.log(res.data);
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            // reject(err);
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("key incorect!");
+            } else if (err.status == 404) { 
+              console.log("Not Found");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+      })
+
+  }
 }

@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { ToastService } from './services/toast/toast.service';
 // import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { Platform } from '@ionic/angular';
+import { AuthService } from './services/auth/auth.service';
+import { StorageService } from './services/storage/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +20,9 @@ export class AppComponent {
 
   constructor(
     private router: Router,
+    private storage: StorageService,
     // private ap: AndroidPermissions, 
-    private toast: ToastService, 
+    private toast: ToastService,
     private platform: Platform
   ) {
 
@@ -27,24 +30,29 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // OneSignalInit();
     });
-    // OneSignal.setAppId(this.ONESIGNAL_APP_ID);
-    // OneSignal.setNotificationOpenedHandler( (jsonData: any) => {
-    //   this.toast.show(jsonData.notification.body);
-    //   this.router.navigateByUrl('/notification', { replaceUrl: true });
-    // });
+    OneSignal.setAppId(this.ONESIGNAL_APP_ID);
+    OneSignal.setNotificationOpenedHandler( (jsonData: any) => {
+      this.toast.show(jsonData.notification.body);
+      this.router.navigateByUrl('/notification', { replaceUrl: true });
+    });
     
-    // OneSignal.setNotificationWillShowInForegroundHandler(
-    //    (jsonData: any) => {
-    //     this.toast.show(jsonData.notification.body);
-    //     this.router.navigateByUrl('/notification', { replaceUrl: true });
-    // });
+    OneSignal.setNotificationWillShowInForegroundHandler(
+       (jsonData: any) => {
+        this.toast.show(jsonData.notification.body);
+        this.router.navigateByUrl('/notification', { replaceUrl: true });
+    });
 
-    // OneSignal.promptForPushNotificationsWithUserResponse(function (accepted) {
-    //   // console.log("User accepted notifications: " + accepted);
-    // });
+    OneSignal.promptForPushNotificationsWithUserResponse(function (accepted) {
+      // console.log("User accepted notifications: " + accepted);
+    });
+    
+    
     this.checkPermissionCamera()
     this.checkBackgroundPermission()
+  }
 
+  setUserData(notication : any) {
+    this.storage.setStorage('notication', notication);
   }
 
   private async checkPermissionCamera() {

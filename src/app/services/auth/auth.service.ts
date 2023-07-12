@@ -3,12 +3,18 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { DatabaseService } from '../database.service';
 import { StorageService } from '../storage/storage.service';
+import OneSignal from 'onesignal-cordova-plugin';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  token : any; 
+  idDevice : any;
+  
+  
   constructor(
     private storage: StorageService,
     private router: Router,
@@ -19,6 +25,7 @@ export class AuthService {
 
   async login(email: any, password : any): Promise<any>{
     
+
     const loading = await this.loadingController.create();
     await loading.present();
       
@@ -35,15 +42,25 @@ export class AuthService {
         this.setUserData(JSON.stringify(result))
         if (result.role == "USER"){
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
-        } else if (result.role == "ADMINISTRATOR"){
-          this.router.navigateByUrl('/menu/dashboard-administrator', { replaceUrl: true });
         } else if (result.role == "INSTALASI"){ 
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else if (result.role == "BPFK"){ 
-          this.router.navigateByUrl('/menu/dashboard-bpfk', { replaceUrl: true });
+          this.router.navigateByUrl('/menu/jadwal-kalibrasi', { replaceUrl: true });
         } else {
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         }
+        OneSignal.getDeviceState( (tag : any) => {
+          // token = tag.userId;
+          this.idDevice = tag.userId
+          console.log("this.idDevice",this.idDevice)
+        });
+        this.DB.updateOneSignal(this.idDevice,result.access_token).then (async (res : any) => {
+
+        }).catch(async (e) => {
+          console.log("error updateOneSignal",e)
+          throw(e)
+        })
+
       }
       else if (data.meta.status == 'error'){
         this.router.navigateByUrl('/login', { replaceUrl: true });
@@ -70,8 +87,26 @@ export class AuthService {
     await loading.dismiss();
   }
 
+  async getAuth(){
+    const val = await this.getId();
+
+    if(val){
+      let data = JSON.parse(val)
+      console.log("this.token", data.access_token)
+      this.token = data.access_token
+    }
+  }
+
   setUserData(uid : any) {
     this.storage.setStorage('uid', uid);
+  }
+
+  setUserDeviceNotification(notication : any){
+    this.storage.setStorage('notication', notication);
+  }
+
+  async getUserDeviceNotificationData(){
+    return (await this.storage.getStorage('notication')).value;
   }
 
   async getId (){

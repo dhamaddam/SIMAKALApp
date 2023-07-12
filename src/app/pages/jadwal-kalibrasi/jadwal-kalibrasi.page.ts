@@ -45,7 +45,6 @@ export class JadwalKalibrasiPage implements OnInit {
     
     if(val){
       let data = JSON.parse(val)
-
       console.log("this.token", data.access_token)
       this.token = data.access_token
     }
