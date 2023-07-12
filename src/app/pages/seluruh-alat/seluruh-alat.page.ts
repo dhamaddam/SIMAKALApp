@@ -43,10 +43,8 @@ export class SeluruhAlatPage implements OnInit {
 
   async getAuth(){
     const val = await this.authServices.getId();
-    
     if(val){
       let data = JSON.parse(val)
-
       console.log("this.token", data.access_token)
       this.token = data.access_token
     }

@@ -30,21 +30,21 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // OneSignalInit();
     });
-    OneSignal.setAppId(this.ONESIGNAL_APP_ID);
-    OneSignal.setNotificationOpenedHandler( (jsonData: any) => {
-      this.toast.show(jsonData.notification.body);
-      this.router.navigateByUrl('/notification', { replaceUrl: true });
-    });
+    // OneSignal.setAppId(this.ONESIGNAL_APP_ID);
+    // OneSignal.setNotificationOpenedHandler( (jsonData: any) => {
+    //   this.toast.show(jsonData.notification.body);
+    //   this.router.navigateByUrl('/notification', { replaceUrl: true });
+    // });
     
-    OneSignal.setNotificationWillShowInForegroundHandler(
-       (jsonData: any) => {
-        this.toast.show(jsonData.notification.body);
-        this.router.navigateByUrl('/notification', { replaceUrl: true });
-    });
+    // OneSignal.setNotificationWillShowInForegroundHandler(
+    //    (jsonData: any) => {
+    //     this.toast.show(jsonData.notification.body);
+    //     this.router.navigateByUrl('/notification', { replaceUrl: true });
+    // });
 
-    OneSignal.promptForPushNotificationsWithUserResponse(function (accepted) {
-      // console.log("User accepted notifications: " + accepted);
-    });
+    // OneSignal.promptForPushNotificationsWithUserResponse(function (accepted) {
+    //   // console.log("User accepted notifications: " + accepted);
+    // });
     
     
     this.checkPermissionCamera()

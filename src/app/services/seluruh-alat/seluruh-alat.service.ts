@@ -37,7 +37,7 @@ export class SeluruhAlatService {
 
   async getSeluruhAlatData(token : string) {
     try {
-      let getSeluruhAlat : any = this.api.getAllAlatKesehatan('1',token).then(async (params : any) =>{
+      let getSeluruhAlat : any = this.api.getAllAlatKesehatan(token).then(async (params : any) =>{
         const data = JSON.parse(params)
         await this._allDataAlatKesehatan.next(data.data)
       } )

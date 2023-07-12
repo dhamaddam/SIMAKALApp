@@ -4,6 +4,7 @@ import { GlobalService } from 'src/app/services/global/global.service';
 import { MonitoringAlatService } from 'src/app/services/monitoring-alat/monitoring-alat.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { NavExtrasServiceService } from 'src/app/services/nav-extras-service/nav-extras-service.service';
 
 @Component({
   selector: 'app-monitoring-alat',
@@ -31,7 +32,7 @@ export class MonitoringAlatPage implements OnInit {
     private router: Router, 
     private activatedRoute: ActivatedRoute, 
     private authServices : AuthService,
-  
+    private navExtras : NavExtrasServiceService
   ) { 
 
   }
@@ -59,10 +60,8 @@ export class MonitoringAlatPage implements OnInit {
 
   async getAuth(){
     const val = await this.authServices.getId();
-    
     if(val){
       let data = JSON.parse(val)
-
       console.log("this.token", data.access_token)
       this.token = data.access_token
     }
@@ -79,12 +78,10 @@ export class MonitoringAlatPage implements OnInit {
     }, 1000);
   }
 
-  handleClick (event : any, param : string){
-    this.router.navigate(['details-monitoring'], {
-      queryParams: {
-        param: param
-      }
-    });
+  handleClick (event : any, param : any){
+    console.log("isi monitoring row", param)
+    this.navExtras.setExtras(param)
+    this.router.navigateByUrl('details-monitoring');
   }
 
   

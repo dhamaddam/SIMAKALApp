@@ -186,16 +186,13 @@ export class DatabaseService {
     })
   }
 
-  getAllAlatKesehatan(id : string, token : string){
-    let params = {
-      'id': id,
-    };
+  getAllAlatKesehatan( token : string){
+    
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'x-api-key': this.key,
         'Authorization' : `Bearer ${token}`
-
       })
     };
 
@@ -216,7 +213,39 @@ export class DatabaseService {
             reject(err);
         })
     })
+  }
 
+  getAllAlatKesehatanById(id : string,token : string){
+    
+    let params = {
+      'id': id
+    };
+
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+
+    return new Promise((resolve, reject) => {
+      this.http.get(this.baseUrl+'medicalDevice?id='+id,httpHeader).subscribe( result => {
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("password incorect!");
+            } else if (err.status == 404) { 
+              console.log("password or Username incorect!");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+    })
   }
 
   saveInputAlatKesehatan(data : Alat[], token : string){

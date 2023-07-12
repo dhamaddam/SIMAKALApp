@@ -142,7 +142,13 @@ export class MenuPage implements OnInit {
         this.pages = this.pages
         this.username = data.username
         this.role_name = "superAdmin"
-      } else if (data.role == "INSTALASI"){
+      }
+      else if (data.role == "ADMIN"){
+        this.pages = this.pages
+        this.username = data.username
+        this.role_name = "ADMIN"
+      }
+       else if (data.role == "INSTALASI"){
         this.pages = this.pages_instalasi
         this.username = data.username
         this.role_name = "Instalasi"
