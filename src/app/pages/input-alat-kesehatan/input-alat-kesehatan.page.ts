@@ -20,6 +20,10 @@ export class InputAlatKesehatanPage implements OnInit {
   isLoading: boolean = false; 
   myForm : any;
   token : any;
+  monul_date : any = moment("2023-01-15T08:47").format("YYYY-MM-DDTHH:mm");
+  waktuAwal : any = moment("2023-01-15T08:47").format("YYYY-MM-DDTHH:mm");
+  waktuFinish : any = moment("2023-12-30T16:00").format("YYYY-MM-DDTHH:mm");
+  dateExample = new Date().toISOString();
 
   allInstalasi : any[] = [];
   allInstalasiSubs: Subscription = new Subscription;

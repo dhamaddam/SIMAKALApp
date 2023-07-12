@@ -11,6 +11,7 @@ import { JadwalKalibrasiService } from 'src/app/services/jadwal-kalibrasi/jadwal
 })
 export class JadwalKalibrasiPage implements OnInit {
   token : any; 
+  re_calibration : string = "false";
   allContentDummy : any[] = [];
   allContentDummySub : Subscription = new Subscription;
   isLoading: boolean = false;
@@ -32,6 +33,15 @@ export class JadwalKalibrasiPage implements OnInit {
     this.allAlatDataSub = this.jadwalKalibrasiServices.allDataAlatKesehatan.subscribe(data => {
       if (data instanceof Array){
         this.allAlatData = data;
+        this.allAlatData.forEach(element => {
+          if (element.details[0].re_calibration == null){
+            this.re_calibration = "false"
+          } else {
+            this.re_calibration = "true"
+          }
+          // console.log("element.details", this.re_calibration)
+          
+        });
       } else {
         this.allAlatData = this.allAlatData.concat(data);
       }

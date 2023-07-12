@@ -23,8 +23,21 @@
   <ion-grid >
     <ion-row *ngFor="let row of allAlatData; index as i">
       <ion-col size ="2">{{ i + 1 }}</ion-col>
-      <ion-col>{{ row?.name }}</ion-col>
-      <ion-col><ion-button size="small" > {{ row?.details.re_calibration }} </ion-button></ion-col>
+      <ion-col>{{row?.name}}</ion-col>
+      <ion-col>
+        <ng-container [ngSwitch]="re_calibration">
+          <ng-container *ngSwitchCase='"false"' [ngTemplateOutlet]="default"></ng-container>
+          <ng-container *ngSwitchCase='"true"' [ngTemplateOutlet]="ready"></ng-container>
+        </ng-container>
+
+        <ng-template #default>
+          <ion-button size="small" color="danger">Nihil</ion-button>
+        </ng-template>
+
+        <ng-template #ready>
+          <ion-button size="small" color="warning">{{row?.details[0].re_calibration}}</ion-button>
+        </ng-template>
+      </ion-col>
    </ion-row>
   </ion-grid>
 

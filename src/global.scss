@@ -35,3 +35,8 @@
 .ctm-font-2 {
     font-size: x-small;
 }
+ion-popover {
+    &.width-80 {
+      --width: 80%;
+    }
+  }
