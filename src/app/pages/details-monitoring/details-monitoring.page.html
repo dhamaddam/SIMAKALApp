@@ -11,123 +11,292 @@
 
 <ion-content class="ion-padding" [fullscreen]="true">
   
-
-  <ion-list>
-    <ion-item>
-      <ion-select interface="action-sheet" placeholder="Leukimia Phanotyping">
-          <ion-select-option value="suction_pump">Suction Pump</ion-select-option>
-          <ion-select-option value="blood_pressure_monitor">Blood Pressure Monitor</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-
   <ion-card> 
     <ion-card-header> 
       STATUS  :
     </ion-card-header>
   <ion-row >
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-          <ion-avatar>
-            <ion-icon name="checkmark-circle" color="success"></ion-icon>
-          </ion-avatar>
-          <ion-label color="success" class="ion-text-center">Layak Pakai</ion-label>
-        </ion-row>
-      </ion-grid>
-      
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-avatar>
-              <ion-icon name="construct" color="warning"></ion-icon>
-            </ion-avatar>
-            <ion-label color="warning" class="ion-text-center">Dalam Perbaikan</ion-label>
-          </ion-row>
-        </ion-grid>
-
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-avatar>
-              <ion-icon name="thumbs-up-sharp" color="primary"></ion-icon>
-            </ion-avatar>
-            <ion-label color="primary" class="ion-text-center">Selesai Perbaikan</ion-label>
-          </ion-row>
-        </ion-grid>
-
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-avatar>
-              <ion-icon name="close-circle-sharp" color="danger"></ion-icon>
-            </ion-avatar>
-            <ion-label color="danger">Gagal Perbaikan</ion-label>
-          </ion-row>
-        </ion-grid>
+    <ng-container [ngSwitch]="this.status_alat">
+      <ng-container *ngSwitchCase='"status_belum_diisi"' [ngTemplateOutlet]="default"></ng-container>
+      <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
+      <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
+      <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
+      <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
+    </ng-container>
   </ion-row>
+
+  <ng-template #default>
+    <ion-grid >
+      <ion-row class="ion-justify-content-center">
+      <ion-avatar>
+        <ion-icon name="checkmark-circle" ></ion-icon>
+      </ion-avatar>
+      <ion-label class="ion-justify-content-center">Ready</ion-label>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="construct" ></ion-icon>
+        </ion-avatar>
+        <ion-label class="ion-text-center">Dalam Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-avatar>
+            <ion-icon name="thumbs-up-sharp" ></ion-icon>
+          </ion-avatar>
+          <ion-label class="ion-justify-content-center">Selesai Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="close-circle-sharp" ></ion-icon>
+        </ion-avatar>
+        <ion-label >Gagal Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
+  <ng-template #masaWarning>
+    <ion-grid >
+      <ion-row class="ion-justify-content-center">
+      <ion-avatar>
+        <ion-icon name="checkmark-circle" ></ion-icon>
+      </ion-avatar>
+      <ion-label class="ion-justify-content-center">Ready</ion-label>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="construct" color="warning"></ion-icon>
+        </ion-avatar>
+        <ion-label color="warning" class="ion-text-center">Dalam Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-avatar>
+            <ion-icon name="thumbs-up-sharp" ></ion-icon>
+          </ion-avatar>
+          <ion-label class="ion-justify-content-center">Selesai Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="close-circle-sharp" ></ion-icon>
+        </ion-avatar>
+        <ion-label >Gagal Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
+  <ng-template #siapPakai>
+    <ion-grid >
+      <ion-row class="ion-justify-content-center">
+      <ion-avatar>
+        <ion-icon name="checkmark-circle" color="success"></ion-icon>
+      </ion-avatar>
+      <ion-label color="success" class="ion-justify-content-center">Ready</ion-label>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="construct" ></ion-icon>
+        </ion-avatar>
+        <ion-label class="ion-text-center">Dalam Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-avatar>
+            <ion-icon name="thumbs-up-sharp" ></ion-icon>
+          </ion-avatar>
+          <ion-label class="ion-justify-content-center">Selesai Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="close-circle-sharp" ></ion-icon>
+        </ion-avatar>
+        <ion-label >Gagal Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
+  <ng-template #sedangDalamPerbaikan>
+    <ion-grid >
+      <ion-row class="ion-justify-content-center">
+      <ion-avatar>
+        <ion-icon name="checkmark-circle" ></ion-icon>
+      </ion-avatar>
+      <ion-label class="ion-justify-content-center">Ready</ion-label>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="construct" ></ion-icon>
+        </ion-avatar>
+        <ion-label class="ion-text-center">Dalam Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-avatar>
+            <ion-icon name="thumbs-up-sharp" color="primary"></ion-icon>
+          </ion-avatar>
+          <ion-label color="primary" class="ion-justify-content-center">Selesai Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="close-circle-sharp" ></ion-icon>
+        </ion-avatar>
+        <ion-label >Gagal Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
+  <ng-template #Danger>
+    <ion-grid >
+      <ion-row class="ion-justify-content-center">
+      <ion-avatar>
+        <ion-icon name="checkmark-circle" ></ion-icon>
+      </ion-avatar>
+      <ion-label class="ion-justify-content-center">Ready</ion-label>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="construct" ></ion-icon>
+        </ion-avatar>
+        <ion-label class="ion-text-center">Dalam Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-avatar>
+            <ion-icon name="thumbs-up-sharp" ></ion-icon>
+          </ion-avatar>
+          <ion-label  class="ion-justify-content-center">Selesai Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="close-circle-sharp" color="danger"></ion-icon>
+        </ion-avatar>
+        <ion-label color="danger">Gagal Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
 </ion-card>
 
-<ion-grid>
-  <ion-row>
+<form (ngSubmit)="saveData()" [formGroup]="myForm" class="ion-margin">
+  <div *ngIf="isLoading" class="ion-text-center alignSpinner">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <ion-grid *ngFor="let row of resultData">
+    
+    <ion-row>
       <ion-col>
-          <ion-label>Instalasi</ion-label>
-          <ion-item>
-            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
-          </ion-item>
+        <ion-label class="ctm-font-2">Nama Alat</ion-label>
+        <ion-item>
+            <ion-input [readonly]="true" type="text" value="{{row?.name}}"></ion-input>
+        </ion-item>
       </ion-col>
-  </ion-row>
- </ion-grid> 
+    </ion-row>
 
- <ion-grid>
-  <ion-row>
+    <ion-row>
       <ion-col>
-          <ion-label>Nama Alat</ion-label>
+        <ion-label class="ctm-font-2">Monitoring Alat</ion-label>
+        <ion-list>
           <ion-item>
-            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
+          <ion-select [(ngModel)]="myForm.form" interface="action-sheet" formControlName="kondisi_alat" >
+            <ion-select-option value="status_belum_diisi">Status Belum Diisi</ion-select-option>
+            <ion-select-option value="layak_pakai">Layak Pakai</ion-select-option>
+            <ion-select-option value="sedang_dalam_perbaikan">Sedang Dalam Perbaikan</ion-select-option>
+            <ion-select-option value="menunggu_sparepart" >Menunggu Sparepart</ion-select-option>
+            <ion-select-option value="selesai_perbaikan">Selesai Perbaikan</ion-select-option>
+            <ion-select-option value="gagal_perbaikan">Gagal Perbaikan</ion-select-option>
+          </ion-select>
           </ion-item>
+          </ion-list>
       </ion-col>
-  </ion-row>
- </ion-grid> 
+    </ion-row>
 
- <ion-grid>
-  <ion-row>
+    <ion-row>
       <ion-col>
-          <ion-label>Nomor Seri</ion-label>
-          <ion-item>
-            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
-          </ion-item>
+        <ion-label class="ctm-font-2">Ruang Instalasi</ion-label>
+        <ion-item>
+            <ion-input [readonly]="true" type="text" value="{{row?.room}}"></ion-input>
+        </ion-item>
       </ion-col>
-  </ion-row>
- </ion-grid> 
+    </ion-row>
 
- <ion-grid>
-  <ion-row>
+    <ion-row>
       <ion-col>
-          <ion-label>Nomor Inventaris</ion-label>
-          <ion-item>
-            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
-          </ion-item>
+        <ion-label class="ctm-font-2">Nomor Seri</ion-label>
+        <ion-item>
+            <ion-input [readonly]="true" type="text" value="{{row?.serial_no}}"></ion-input>
+        </ion-item>
       </ion-col>
-  </ion-row>
- </ion-grid> 
+    </ion-row>
 
- <ion-grid>
-  <ion-row>
+    <ion-row>
       <ion-col>
-          <ion-label>Merk Type</ion-label>
-          <ion-item>
-            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
-          </ion-item>
+        <ion-label class="ctm-font-2">Monitoring Awal</ion-label>
+        <ion-item>
+            <ion-input [readonly]="true" type="text" value="{{row?.initial_monitoring}}"></ion-input>
+        </ion-item>
       </ion-col>
-  </ion-row>
- </ion-grid> 
+    </ion-row>
 
- <ion-grid>
-  <ion-row>
+    <ion-row>
       <ion-col>
-          <ion-label>Kalibrasi Awal</ion-label>
-          <ion-item>
-            <ion-input [disabled]="true" value="Instalasi Gawat Darurat" fill="outline"></ion-input>
-          </ion-item>
+        <ion-label class="ctm-font-2">Monitoring Ulang</ion-label>
+        <ion-item>
+            <ion-input [readonly]="true" type="text" value="{{row?.re_monitoring}}"></ion-input>
+        </ion-item>
       </ion-col>
-  </ion-row>
- </ion-grid> 
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-label class="ctm-font-2">Pemilik</ion-label>
+        <ion-item>
+            <ion-input [readonly]="true" type="text" value="{{row?.owner.name}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-button type="submit" expand="full" color="success" shape="round" expand="block">Simpan</ion-button>
+        </ion-col>
+        <ion-col>
+            <ion-button expand="full" color="medium" shape="round">Kembali</ion-button>
+        </ion-col>
+      </ion-row>
+</form>
 
 </ion-content>

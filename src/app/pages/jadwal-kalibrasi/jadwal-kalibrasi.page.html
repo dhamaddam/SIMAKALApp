@@ -23,36 +23,20 @@
   <ion-grid >
     <ion-row *ngFor="let row of allAlatData; index as i">
       <ion-col size ="2">{{ i + 1 }}</ion-col>
-      <ion-col>{{ row?.name }}</ion-col>
+      <ion-col>{{row?.name}}</ion-col>
       <ion-col>
-        <ng-container [ngSwitch]="row?.status">
-          <ng-container *ngSwitchCase=null [ngTemplateOutlet]="default"></ng-container>
-          <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
-          <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
-          <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
-          <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
-     </ng-container>
-     
-      <ng-template #sedangDalamPerbaikan>
-        <ion-button size="small" color="danger">Dalam Perbaikan</ion-button>
-      </ng-template>
-      
-        <ng-template #Danger>
-          <ion-button size="small" color="danger">Danger</ion-button>
-        </ng-template>
-
-        <ng-template #masaWarning>
-          <ion-button size="small" color="warning">Warning</ion-button>
-        </ng-template>
-        
-        <ng-template #siapPakai>
-          <ion-button size="small" color="success">Pakai</ion-button>
-        </ng-template>
+        <ng-container [ngSwitch]="re_calibration">
+          <ng-container *ngSwitchCase='"false"' [ngTemplateOutlet]="default"></ng-container>
+          <ng-container *ngSwitchCase='"true"' [ngTemplateOutlet]="ready"></ng-container>
+        </ng-container>
 
         <ng-template #default>
-          <ion-button size="small" color="default">Default</ion-button>
+          <ion-button size="small" color="danger">Nihil</ion-button>
         </ng-template>
-        
+
+        <ng-template #ready>
+          <ion-button size="small" color="warning">{{row?.details[0].re_calibration}}</ion-button>
+        </ng-template>
       </ion-col>
    </ion-row>
   </ion-grid>

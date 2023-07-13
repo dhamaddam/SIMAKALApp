@@ -1,3 +1,13 @@
 login aplikasi : 
--- john@example.com 123456
--- jane@example.com 123456
+-- "username": "admin","role": "ADMIN",
+-- "username": "katim", "role":"KATIM",
+-- "username": "ka_igd","role":"INSTALASI",
+-- "username": "ka_pk","role": "INSTALASI",
+-- "username": "ka_anggrek1","role":"INSTALASI",
+-- "username": "ka_hd","role": "INSTALASI",
+-- "username": "ka_poli","role": "INSTALASI",
+-- "username": "ptsabaindo","role": "KSO",
+-- "username": "ptenvesalmedikaprima","role": "KSO",
+-- "username": "ptmendjangan","role": "KSO",
+-- "username": "bpfk","role": "BPFK",
+-- "username": "bobbysyahdan","role": "USER",

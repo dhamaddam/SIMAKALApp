@@ -28,7 +28,7 @@ export class NotificationPage implements OnInit {
   ngOnInit() {
     this.allnotificationDataSubs = this.notificationServices.alldataNotification.subscribe( result => {
       if (result instanceof Array){
-        console.log('result allManagementKebun',result)
+        console.log('result allnotificationDataSubs',result)
         this.allnotificationData = result;
       } else {
         this.allnotificationData = this.allnotificationData.concat(result);

@@ -77,15 +77,12 @@
 
         <ion-col size="6" size-md="4" size-lg="2">
             <ion-label  class="ctm-font-2">Nomor Seri</ion-label>
-          
                 <ion-item>
                     <ion-input  type="text" formControlName="nomer_seri" style="margin: 8px;"></ion-input>
                 </ion-item>
-    
         </ion-col>
-
-        </ion-row>
-      </ion-grid>
+      </ion-row>
+    </ion-grid>
       
       
   
@@ -205,10 +202,20 @@
         <ion-col>
             <ion-label class="ctm-font-2">Monitoring Ulang</ion-label>
             <ion-item>
-              <ion-input type="text" formControlName="monitoring_ulang"></ion-input>
+              <ion-input type="text" id="monitoring_ulang" formControlName="monitoring_ulang"></ion-input>
             </ion-item>
         </ion-col>
       </ion-row>
+      <ion-popover trigger="monitoring_ulang" cssClass="width-80">
+        <ng-template>
+          <ion-datetime
+            presentation="date"
+            [(ngModel)]="dateExample"
+            size="cover"
+            [ngModelOptions]="{standalone: true}"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
     </ion-grid>
 
     <ion-grid>
