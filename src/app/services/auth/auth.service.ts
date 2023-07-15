@@ -45,7 +45,7 @@ export class AuthService {
         } else if (result.role == "INSTALASI"){ 
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else if (result.role == "BPFK"){ 
-          this.router.navigateByUrl('/menu/jadwal-kalibrasi', { replaceUrl: true });
+          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else {
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         }
