@@ -12,7 +12,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-grid [fixed]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid >
     <ion-row>
       <ion-col size ="2" >No</ion-col>
       <ion-col>Alat</ion-col>
@@ -22,7 +25,7 @@
 
   <ion-grid *ngFor="let row of allAlatData; index as i">
 
-    <ion-row  (click)="handleClick($event,row)">
+    <ion-row >
       <ion-col size ="2" >{{ i + 1 }}</ion-col>
       <ion-col>{{ row?.name }}</ion-col>
       <ion-col>
@@ -30,27 +33,34 @@
           <ng-container *ngSwitchCase=null [ngTemplateOutlet]="default"></ng-container>
           <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
           <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
+          
+          
+          <ng-container *ngSwitchCase='"selesai_perbaikan"' [ngTemplateOutlet]="selesai_perbaikan"></ng-container>
           <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
           <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
         </ng-container>
        
         <ng-template #Danger>
-          <ion-button size="small" color="danger">Danger</ion-button>
+          <ion-button size="small" color="danger" (click)="handleClick($event,row)">Danger</ion-button>
         </ng-template>
 
         <ng-template #sedangDalamPerbaikan>
-          <ion-button size="small" color="danger">Dalam Perbaikan</ion-button>
+          <ion-button size="small" color="danger" (click)="handleClick($event,row)">Sdg Perb.</ion-button>
+        </ng-template>
+
+        <ng-template #selesai_perbaikan>
+          <ion-button size="small" color="success" (click)="handleClick($event,row)">Selesai Perb.</ion-button>
         </ng-template>
 
         <ng-template #masaWarning>
-          <ion-button size="small" color="warning" >Warning</ion-button>
+          <ion-button size="small" color="warning" (click)="handleClick($event,row)">Menunggu Spar.</ion-button>
         </ng-template>
         <ng-template #siapPakai>
-          <ion-button size="small" color="success">Pakai</ion-button>
+          <ion-button size="small" color="success" (click)="handleClick($event,row)">Pakai</ion-button>
         </ng-template>
 
         <ng-template #default>
-          <ion-button size="small">belum dimonitor</ion-button>
+          <ion-button size="small" (click)="handleClick($event,row)">Nihil</ion-button>
         </ng-template>
         
       </ion-col>

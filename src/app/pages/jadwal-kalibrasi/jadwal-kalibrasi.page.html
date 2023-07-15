@@ -20,11 +20,11 @@
       <ion-col>Jadwal</ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid >
-    <ion-row *ngFor="let row of allAlatData; index as i">
+  <ion-grid *ngFor="let row of allAlatData; index as i">
+    <ion-row (click)="handleClick($event,row)">
       <ion-col size ="2">{{ i + 1 }}</ion-col>
       <ion-col>{{ row?.name }}</ion-col>
-      <ion-col><ion-button size="small" > {{ row?.details.re_calibration }} </ion-button></ion-col>
+      <ion-col><ion-button size="small" > {{ row?.details[0].re_calibration }} </ion-button></ion-col>
    </ion-row>
   </ion-grid>
 

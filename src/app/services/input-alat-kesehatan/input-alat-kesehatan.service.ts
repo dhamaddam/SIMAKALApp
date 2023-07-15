@@ -17,13 +17,24 @@ export class InputAlatKesehatanService {
     private api : DatabaseService,
   ) {
 
-   
-   }
+  }
 
   saveInputAlatKesehatan(data : Alat[], token : string){
     this.api.saveInputAlatKesehatan(data, token).then(async (params:any) => {
-      console.log(params)
-       if (params.status == "success") {
+      const data = JSON.parse(params)
+       if (data.meta.status == "success") {
+        console.log("data sukses disimpan")
+       } 
+       else { 
+        console.log("data gagal disimpan")
+       }
+    })
+  }
+
+  updateAlatKesehatan(id_alat: string, data : any, token : string){
+    this.api.updateAlatKesehatan(id_alat,data, token).then(async (params:any) => {
+      const data = JSON.parse(params)
+       if (data.meta.status == "success") {
         console.log("data sukses disimpan")
        } 
        else { 

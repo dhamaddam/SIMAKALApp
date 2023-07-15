@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      {{formTitle}}
+  </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form (ngSubmit)="saveData()" [formGroup]="myForm" class="ion-margin">
+    <div *ngIf="isLoading" class="ion-text-center alignSpinner">
+      <ion-spinner color="primary"></ion-spinner>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="ctm-font-2">Kondisi Alat</ion-label>
+          <ion-list>
+              <ion-item>
+                  <ion-select interface="action-sheet" formControlName="calibration_status" placeholder="Status Kalibrasi">
+                      <ion-select-option value="berhasil_kalibrasi">Berhasil Kalibrasi</ion-select-option>
+                      <ion-select-option value="gagal_kalibrasi">Gagal Kalibrasi</ion-select-option>
+                  </ion-select>
+              </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="ctm-font-2">Nama Alat</ion-label>
+          <ion-item>
+              <ion-input type="file" ></ion-input>
+          </ion-item>
+      </ion-col>
+      </ion-row>
+    </ion-grid>  
+
+    <ion-grid>
+      <ion-row>
+          <ion-col>
+              <ion-button type="submit" expand="full" color="success" shape="round" expand="block">Simpan</ion-button>
+          </ion-col>
+          <ion-col>
+              <ion-button expand="full" color="medium" shape="round">Kembali</ion-button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+</ion-content>

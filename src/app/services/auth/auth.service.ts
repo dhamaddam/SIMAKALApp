@@ -87,16 +87,6 @@ export class AuthService {
     await loading.dismiss();
   }
 
-  async getAuth(){
-    const val = await this.getId();
-
-    if(val){
-      let data = JSON.parse(val)
-      console.log("this.token", data.access_token)
-      this.token = data.access_token
-    }
-  }
-
   setUserData(uid : any) {
     this.storage.setStorage('uid', uid);
   }

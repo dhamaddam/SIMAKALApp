@@ -63,11 +63,11 @@
           <ion-list>
             <ion-item>
               <ion-select formControlName="pic" placeholder="PIC" (ionChange)="handleInstalasi($event)">
-                <ion-select-option  value="ka.igd">Ka. IGD</ion-select-option>
-                <ion-select-option  value="ka.pk">Ka. PK</ion-select-option>
-                <ion-select-option  value="ka.anggrek">Ka. Anggrek </ion-select-option>
-                <ion-select-option  value="ka.hd">Ka. HD</ion-select-option>
-                <ion-select-option  value="ka.poli_kebidanan">Ka. Poli Kebidanan</ion-select-option>
+                <ion-select-option  value=3>Ka. IGD</ion-select-option>
+                <ion-select-option  value=4>Ka. PK</ion-select-option>
+                <ion-select-option  value=5>Ka. Anggrek </ion-select-option>
+                <ion-select-option  value=6>Ka. HD</ion-select-option>
+                <ion-select-option  value=7>Ka. Poli Kebidanan</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-list>
@@ -202,12 +202,7 @@
         <ion-col>
             <ion-label class="ctm-font-2">Monitoring Ulang</ion-label>
             <ion-item>
-              <ion-input [readonly]="true" formControlName="monitoring_ulang"  id="jam" class="ion-text-end"></ion-input>
-              <ion-popover trigger="monitoring_ulang" size="cover">
-                  <ng-template>
-                      <ion-datetime  presentation="time"></ion-datetime>
-                  </ng-template>
-              </ion-popover>
+              <ion-input formControlName="monitoring_ulang" class="ion-text-end"></ion-input>
             </ion-item>
         </ion-col>
       </ion-row>

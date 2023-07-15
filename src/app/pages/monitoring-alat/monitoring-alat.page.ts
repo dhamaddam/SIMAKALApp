@@ -29,9 +29,9 @@ export class MonitoringAlatPage implements OnInit {
   constructor(
     private global : GlobalService,
     private monitoringAlatServices : MonitoringAlatService,
-    private router: Router, 
     private activatedRoute: ActivatedRoute, 
     private authServices : AuthService,
+    private router: Router, 
     private navExtras : NavExtrasServiceService
   ) { 
 
@@ -58,6 +58,7 @@ export class MonitoringAlatPage implements OnInit {
     this.getAllData()
   }
 
+
   async getAuth(){
     const val = await this.authServices.getId();
     if(val){
@@ -67,9 +68,25 @@ export class MonitoringAlatPage implements OnInit {
     }
   }
 
+  handleRefresh(event : any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.allAlatDataSub = this.monitoringAlatServices.allDataAlatKesehatan.subscribe(data => {
+        if (data instanceof Array){
+          this.allAlatData = data;
+        } else {
+          this.allAlatData = this.allAlatData.concat(data);
+        }
+      })
+  
+      this.getAllData()
+      event.target.complete();
+      }, 2000);
+    }
+
   async getAllData (){
-    this.isLoading = true;
-    this.global.showLoader();
+    // this.isLoading = true;
+    // this.global.showLoader();
     setTimeout(async() => {
       await this.monitoringAlatServices.getContentDummy();
       await this.monitoringAlatServices.getSeluruhAlatData(this.token);
