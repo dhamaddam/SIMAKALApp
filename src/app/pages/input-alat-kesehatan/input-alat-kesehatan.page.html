@@ -6,7 +6,7 @@
       <ion-buttons slot="start">
           <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
-      <ion-buttons slot="end">
+      <ion-buttons>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -151,40 +151,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-              
-
-    <ion-grid>
-      <ion-row>
-          <ion-col>
-              <ion-label class="ctm-font-2">Kalibrasi Awal</ion-label>
-              <ion-item>
-                <ion-input type="text" formControlName="kalibrasi_awal"></ion-input>
-              </ion-item>
-          </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-            <ion-label class="ctm-font-2">Kalibrasi Ulang</ion-label>
-            <ion-item>
-              <ion-input type="text" formControlName="kalibrasi_ulang"></ion-input>
-            </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-            <ion-label class="ctm-font-2">Monitoring Awal</ion-label>
-            <ion-item>
-              <ion-input type="text" formControlName="monitoring_awal"></ion-input>
-            </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
 
     <ion-grid>
       <ion-row>
@@ -199,23 +165,78 @@
 
     <ion-grid>
       <ion-row>
+          <ion-col>
+              <ion-label class="ctm-font-2">Kalibrasi Awal</ion-label>
+              <ion-item>
+                
+                <ion-datetime-button datetime="datetime"></ion-datetime-button>
+  
+                <ion-modal [keepContentsMounted]="true">
+                  <ng-template>
+                    <ion-datetime id="datetime" presentation="date" [showDefaultButtons]="true"></ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-item>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
         <ion-col>
-            <ion-label class="ctm-font-2">Monitoring Ulang</ion-label>
+            <ion-label class="ctm-font-2">Kalibrasi Ulang</ion-label>
             <ion-item>
-              <ion-input type="text" id="monitoring_ulang" formControlName="monitoring_ulang"></ion-input>
+             
+              <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="datetime" presentation="date"></ion-datetime>
+                </ng-template>
+              </ion-modal>
             </ion-item>
         </ion-col>
       </ion-row>
-      <ion-popover trigger="monitoring_ulang" cssClass="width-80">
-        <ng-template>
-          <ion-datetime
-            presentation="date"
-            [(ngModel)]="dateExample"
-            size="cover"
-            [ngModelOptions]="{standalone: true}"
-          ></ion-datetime>
-        </ng-template>
-      </ion-popover>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-label class="ctm-font-2">Monitoring Awal</ion-label>
+            <ion-item>
+  
+              <ion-datetime-button datetime="datetime" color="tertiary"></ion-datetime-button>
+
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="datetime" presentation="date" [showDefaultButtons]="true"></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-label class="ctm-font-2">Monitoring Ulang</ion-label>
+            <ion-item>
+
+              
+              <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="datetime" presentation="date"></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+
+        </ion-col>
+      </ion-row>
     </ion-grid>
 
     <ion-grid>

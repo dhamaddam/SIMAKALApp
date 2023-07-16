@@ -154,4 +154,6 @@ export class InputAlatKesehatanPage implements OnInit {
     this.global.hideLoader();
   }
 
+
+
 }
