@@ -27,11 +27,11 @@ export class NotificationService {
     return this._modeldataNotification.asObservable();
   }
 
-  async getNotifications(role : string){
+  async getNotifications(token : string){
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.DB.getNotification(role).then (async (res : any) => {
+    this.DB.getNotification(token).then (async (res : any) => {
       console.log("isi auth service",res);
       const data = JSON.parse(res)
       console.log(data.status)

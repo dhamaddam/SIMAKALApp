@@ -36,10 +36,45 @@ export class InputAlatKesehatanService {
       const data = JSON.parse(params)
        if (data.meta.status == "success") {
         console.log("data sukses disimpan")
+        this.sendAndCreateNotificationMonitoring(id_alat,data,token)
        } 
        else { 
         console.log("data gagal disimpan")
        }
+    })
+  }
+
+  updateAlatKesehatanCalibration(id_alat: string, data : any, token : string){
+    this.api.updateAlatKesehatan(id_alat,data, token).then(async (params:any) => {
+      const data = JSON.parse(params)
+       if (data.meta.status == "success") {
+        console.log("data sukses disimpan")
+        this.sendAndCreateNotificationCalibration(id_alat,data,token)
+       } 
+       else { 
+        console.log("data gagal disimpan")
+       }
+    })
+  }
+
+  sendAndCreateNotificationMonitoring(tanggal : string, data : any, token:string){
+    this.api.sendAndCreateNotificationMonitoring(tanggal, data, token).then(async (params : any) => {
+      const data = JSON.parse(params)
+      if (data.meta.status == "success"){
+        console.log("data sukses disimpan")
+      } else {
+        console.log("data sukses disimpan")
+      }
+    })
+  }
+  sendAndCreateNotificationCalibration(tanggal : string, data : any, token:string){
+    this.api.sendAndCreateNotificationCalibration(tanggal, data, token).then(async (params : any) => {
+      const data = JSON.parse(params)
+      if (data.meta.status == "success"){
+        console.log("data sukses disimpan")
+      } else {
+        console.log("data sukses disimpan")
+      }
     })
   }
 

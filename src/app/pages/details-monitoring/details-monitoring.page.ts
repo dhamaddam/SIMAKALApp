@@ -23,8 +23,8 @@ export class DetailsMonitoringPage implements OnInit {
   formTitle : string = "Detail Monitoring"
   token : any; 
   allDataAlatKesehatanById : any[] = [];
-  resultData : any[] = [];
   allDataAlatKesehatanByIdSub : Subscription = new Subscription;
+  resultData : any[] = [];
   detailsAlat : any[] = [];
   today: any = moment().format("YYYY-MM-DD");
   status_alat : string = ""
@@ -47,10 +47,22 @@ export class DetailsMonitoringPage implements OnInit {
     this.allDataAlatKesehatanById = this.navExtras.getExtras()
     this.resultData.push(this.navExtras.getExtras())
     this.resultData.forEach(element => {
+
+      console.log("element",element.details[0].calibration_status)
       this.myForm = this.fb.group({ 
         tanggal: [this.today, [Validators.required]],
         monitoring_status: ['', ],
-        name:[element.name, [Validators.required]]
+        name:[element.name, [Validators.required]],
+        pic:[element.pic, ],
+        inventory_no:[element.inventory_no,],
+        room : [element.room,],
+        type : [element.type,],
+        calibration_status: [element.calibration_status,],
+        owner_id : [element.owner_id,],
+        initial_calibration : [element.details[0].initial_calibration,],
+        re_calibration : [element.details[0].re_calibration],
+        initial_monitoring : [element.details[0].initial_monitoring],
+        re_monitoring : [element.details[0].re_monitoring]
       });
       this.id_alat = element.id
 
@@ -69,7 +81,6 @@ export class DetailsMonitoringPage implements OnInit {
   placeData (param : any){
     try{
       setTimeout(async() => {
-        console.log("this.id_alat",this.id_alat)
         await this.inputAlatKesehatanServices.updateAlatKesehatan(this.id_alat,param, this.token)
         this.isLoading = false;
         this.global.hideLoader();

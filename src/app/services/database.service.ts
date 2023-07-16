@@ -156,19 +156,16 @@ export class DatabaseService {
     })
   }
 
-  getNotification(id_kar : string) {
-    let params = {
-      'id_kar': id_kar
-    };
-
+  getNotification(token : string) {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'x-api-key': this.key
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
       })
     };
     return new Promise((resolve, reject) => {
-      this.http.post(this.baseUrl+'notification', params, httpHeader).subscribe( result => {
+      this.http.get(this.baseUrl+'notification', httpHeader).subscribe( result => {
         resolve(JSON.stringify(result))
       },
         err => {
@@ -327,7 +324,6 @@ export class DatabaseService {
     console.log("data saveInputAlatKesehatan",data)
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUrl+'medicalDevice/update?id='+id, data, httpHeader).subscribe(result => {
-        //console.log(res.data);
         resolve(JSON.stringify(result))
       },
         err => {
@@ -344,6 +340,82 @@ export class DatabaseService {
             reject(err);
         })
       })
+  }
 
+  sendAndCreateNotificationMonitoring(tanggal:string, data : any, token : string){
+
+    console.log("data sendAndCreateNotificationMonitoring",data)
+    let params = {
+      'roles' : ["ADMIN","KSO","BPFK","KATIM"],
+      'title' : 'Notifikasi Status Alat '+tanggal,
+      'link' : '' ,
+      'message' : data.data.name + " dalam status "+ data.data.monitoring_status,
+    };
+
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl+'notification/createForRoles', params, httpHeader).subscribe(result => {
+        console.log("result saveInputAlatKesehatan",result);
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            // reject(err);
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("key incorect!");
+            } else if (err.status == 404) { 
+              console.log("Not Found");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+      })
+  }
+
+  sendAndCreateNotificationCalibration(tanggal:string, data : any, token : string){
+
+    console.log("data sendAndCreateNotificationCalibration",data)
+    var date = new Date(data.data.details[0].re_calibration);
+    let params = {
+      'roles' : ["ADMIN","BPFK","KSO"],
+      'title' : 'Notifikasi Kalibrasi Alat',
+      'link' : '' ,
+      'message' : data.data.name + " Dapat Dikalibrasi Pada "+ date.toDateString(),
+    };
+
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl+'notification/createForRoles', params, httpHeader).subscribe(result => {
+        console.log("result saveInputAlatKesehatan",result);
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            // reject(err);
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("key incorect!");
+            } else if (err.status == 404) { 
+              console.log("Not Found");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+      })
   }
 }
