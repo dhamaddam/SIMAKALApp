@@ -82,11 +82,11 @@ export class UpdateKalibrasiPage implements OnInit {
   placeData (param : any){
     try{
       setTimeout(async() => {
-        await this.inputAlatKesehatanServices.updateAlatKesehatan(this.id_alat,param, this.token)
+        await this.inputAlatKesehatanServices.updateAlatKesehatanCalibration(this.id_alat,param, this.token)
         this.isLoading = false;
         this.global.hideLoader();
         // this.router.navigateByUrl('/menu/monitoring-alat', { replaceUrl: true });
-        this.router.navigate(['/menu/monitoring-alat'], {
+        this.router.navigate(['/menu/jadwal-kalibrasi'], {
           // queryParams: {
           //   param: x
           // }

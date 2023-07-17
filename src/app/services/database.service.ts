@@ -342,13 +342,43 @@ export class DatabaseService {
       })
   }
 
+  updateAlatKesehatanCalibration(id:string, data : any, token : string){
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    console.log("data saveInputAlatKesehatanCalibration",data)
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl+'deviceDetail/updateCalibrationStatus?id='+id, data, httpHeader).subscribe(result => {
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            // reject(err);
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("key incorect!");
+            } else if (err.status == 404) { 
+              console.log("Not Found");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+      })
+  }
+
   sendAndCreateNotificationMonitoring(tanggal:string, data : any, token : string){
 
     console.log("data sendAndCreateNotificationMonitoring",data)
     let params = {
       'roles' : ["ADMIN","KSO","BPFK","KATIM"],
       'title' : 'Notifikasi Status Alat '+tanggal,
-      'link' : '' ,
+      'link' : '/menu/monitoring-alat' ,
+      'device_id':data.data.id,
       'message' : data.data.name + " dalam status "+ data.data.monitoring_status,
     };
 
@@ -383,11 +413,12 @@ export class DatabaseService {
   sendAndCreateNotificationCalibration(tanggal:string, data : any, token : string){
 
     console.log("data sendAndCreateNotificationCalibration",data)
-    var date = new Date(data.data.details[0].re_calibration);
+    var date = new Date(data.data.re_calibration);
     let params = {
       'roles' : ["ADMIN","BPFK","KSO"],
       'title' : 'Notifikasi Kalibrasi Alat',
-      'link' : '' ,
+      'link' : '/menu/jadwal-kalibrasi' ,
+      'device_id' : data.data.id,
       'message' : data.data.name + " Dapat Dikalibrasi Pada "+ date.toDateString(),
     };
 

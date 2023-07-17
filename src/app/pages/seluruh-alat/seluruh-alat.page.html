@@ -28,8 +28,8 @@
           <ng-container *ngSwitchCase=null [ngTemplateOutlet]="default"></ng-container>
           <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
           <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
-          <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
-          <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
+          <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
+          <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
       </ng-container>
        
         <ng-template #Danger>

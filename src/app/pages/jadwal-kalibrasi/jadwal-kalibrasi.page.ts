@@ -80,6 +80,22 @@ export class JadwalKalibrasiPage implements OnInit {
     this.router.navigateByUrl('update-kalibrasi');
   }
 
+  handleRefresh(event : any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.allAlatDataSub = this.jadwalKalibrasiServices.allDataAlatKesehatan.subscribe(data => {
+        if (data instanceof Array){
+          this.allAlatData = data;
+        } else {
+          this.allAlatData = this.allAlatData.concat(data);
+        }
+      })
+  
+      this.getAllData()
+      event.target.complete();
+      }, 2000);
+    }
+
   ngOnDestroy() {
     if(this.allContentDummySub) this.allContentDummySub.unsubscribe();
    }

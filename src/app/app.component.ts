@@ -33,6 +33,7 @@ export class AppComponent {
     OneSignal.setAppId(this.ONESIGNAL_APP_ID);
     OneSignal.setNotificationOpenedHandler( (jsonData: any) => {
       // this.toast.show(jsonData.notification.body);
+      console.log("jsonData setNotificationOpenedHandler",jsonData)
       // this.router.navigateByUrl('/notification', { replaceUrl: true });
     });
     
