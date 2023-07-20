@@ -59,6 +59,10 @@ const routes: Routes = [
     path: 'notification',
     loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule)
   },
+  {
+    path: 'update-kalibrasi',
+    loadChildren: () => import('./pages/update-kalibrasi/update-kalibrasi.module').then( m => m.UpdateKalibrasiPageModule)
+  },
 ];
 
 @NgModule({

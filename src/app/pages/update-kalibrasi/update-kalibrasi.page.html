@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="md">
+    <ion-title>
+      {{formTitle}}
+  </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-select interface="popover" placeholder="Pilih Kalibrasi Alat" fill="clear">
+        <ion-select-option value="Leukimia Phanotyping">Leukimia Phanotyping</ion-select-option>
+        <ion-select-option value="Suction Pump">Suction Pump</ion-select-option>
+        <ion-select-option value="Blood Pressure Monitor">Blood Pressure Monitor</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+    <ion-col></ion-col>
+    <ion-col>
+      <ion-avatar>
+        <img src="https://images.idiopri.xyz/feature/second/1.png" alt="">
+      </ion-avatar>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-label >Status Kalibrasi</ion-label>
+          <ion-item>
+            <ion-select interface="action-sheet" placeholder="Bagaimana Status Kalibrasi.." fill="clear">
+              <ion-select-option value="Kalibrasi Berhasil">Kalibrasi Berhasil</ion-select-option>
+              <ion-select-option value="Kalibrasi Gagal">Kalibrasi Gagal</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <p>Upload Bukti Kalibrasi</p>
+      </ion-col>
+
+      <ion-col size="auto">
+        <div style="width: 80px;">
+          <ion-button size="small" fill="outline" style="height: 40px;">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+            <ion-button type="submit" expand="full" color="success" shape="round" expand="block">Simpan</ion-button>
+        </ion-col>
+        <ion-col>
+            <ion-button expand="full" color="medium" shape="round">Kembali</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+</ion-content>
