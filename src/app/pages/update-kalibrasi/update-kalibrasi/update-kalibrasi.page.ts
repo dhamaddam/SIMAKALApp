@@ -46,7 +46,7 @@ export class UpdateKalibrasiPage implements OnInit {
       this.myForm = this.fb.group({ 
         tanggal: [this.today, [Validators.required]],
         monitoring_status: ['', ],
-        name:[element.name, [Validators.required]],
+        name:[element.name,],
         pic:[element.pic, ],
         inventory_no:[element.inventory_no,],
         room : [element.room,],

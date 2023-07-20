@@ -46,8 +46,8 @@ export class InputAlatKesehatanService {
 
   updateAlatKesehatanCalibration(id_alat: string, data : any, token : string){
     this.api.updateAlatKesehatanCalibration(id_alat,data, token).then(async (params:any) => {
-      const data = JSON.parse(params)
-       if (data.meta.status == "success") {
+      const data_tem = JSON.parse(params)
+       if (data_tem.meta.status == "success") {
         console.log("data sukses disimpan")
         this.sendAndCreateNotificationCalibration(id_alat,data,token)
        } 

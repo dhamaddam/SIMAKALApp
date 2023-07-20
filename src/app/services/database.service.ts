@@ -321,7 +321,6 @@ export class DatabaseService {
         'Authorization' : `Bearer ${token}`
       })
     };
-    console.log("data saveInputAlatKesehatan",data)
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUrl+'medicalDevice/update?id='+id, data, httpHeader).subscribe(result => {
         resolve(JSON.stringify(result))
@@ -343,6 +342,7 @@ export class DatabaseService {
   }
 
   updateAlatKesehatanCalibration(id:string, data : any, token : string){
+    console.log("data updateAlatKesehatanCalibration",data)
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -350,7 +350,6 @@ export class DatabaseService {
         'Authorization' : `Bearer ${token}`
       })
     };
-    console.log("data saveInputAlatKesehatanCalibration",data)
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUrl+'deviceDetail/updateCalibrationStatus?id='+id, data, httpHeader).subscribe(result => {
         resolve(JSON.stringify(result))
@@ -373,7 +372,6 @@ export class DatabaseService {
 
   sendAndCreateNotificationMonitoring(tanggal:string, data : any, token : string){
 
-    console.log("data sendAndCreateNotificationMonitoring",data)
     let params = {
       'roles' : ["ADMIN","KSO","BPFK","KATIM"],
       'title' : 'Notifikasi Status Alat '+tanggal,
@@ -391,7 +389,6 @@ export class DatabaseService {
     };
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUrl+'notification/createForRoles', params, httpHeader).subscribe(result => {
-        console.log("result saveInputAlatKesehatan",result);
         resolve(JSON.stringify(result))
       },
         err => {
@@ -413,13 +410,13 @@ export class DatabaseService {
   sendAndCreateNotificationCalibration(tanggal:string, data : any, token : string){
 
     console.log("data sendAndCreateNotificationCalibration",data)
-    var date = new Date(data.data.re_calibration);
+    var date = new Date(data.re_calibration);
     let params = {
       'roles' : ["ADMIN","BPFK","KSO"],
       'title' : 'Notifikasi Kalibrasi Alat',
       'link' : '/menu/jadwal-kalibrasi' ,
-      'device_id' : data.data.id,
-      'message' : data.data.name + " Dapat Dikalibrasi Pada "+ date.toDateString(),
+      'device_id' : data.id,
+      'message' : data.name + " Dapat Dikalibrasi Pada "+ date.toDateString(),
     };
 
     const httpHeader = {
