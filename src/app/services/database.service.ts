@@ -431,7 +431,6 @@ export class DatabaseService {
     };
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUrl+'notification/createForRoles', params, httpHeader).subscribe(result => {
-        console.log("result saveInputAlatKesehatan",result);
         resolve(JSON.stringify(result))
       },
         err => {

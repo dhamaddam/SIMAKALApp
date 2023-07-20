@@ -53,13 +53,14 @@ export class AuthService {
           // token = tag.userId;
           this.idDevice = tag.userId
           console.log("this.idDevice",this.idDevice)
+          this.DB.updateOneSignal(this.idDevice,result.access_token).then (async (res : any) => {
+            console.log("updateOneSignal", res)
+          }).catch(async (e) => {
+            console.log("error updateOneSignal",e)
+            throw(e)
+          })
         });
-        this.DB.updateOneSignal(this.idDevice,result.access_token).then (async (res : any) => {
-
-        }).catch(async (e) => {
-          console.log("error updateOneSignal",e)
-          throw(e)
-        })
+       
 
       }
       else if (data.meta.status == 'error'){
