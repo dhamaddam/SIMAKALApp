@@ -51,6 +51,8 @@ export class JadwalKalibrasiPage implements OnInit {
     })
 
     this.getAllData()
+
+   
   }
 
   async getAuth(){
@@ -61,6 +63,7 @@ export class JadwalKalibrasiPage implements OnInit {
       console.log("this.token", data.access_token)
       this.token = data.access_token
     }
+   
   }
 
   async getAllData (){
@@ -73,6 +76,10 @@ export class JadwalKalibrasiPage implements OnInit {
       this.isLoading = false;
       this.global.hideLoader();
     }, 1000);
+
+    this.allAlatData.forEach(element => {
+      console.log("allAlatData details",element)
+    });
   }
 
   handleClick(event : any, param : any){

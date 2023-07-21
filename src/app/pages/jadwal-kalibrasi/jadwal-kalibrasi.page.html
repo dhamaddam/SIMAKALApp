@@ -20,12 +20,14 @@
       <ion-col size ="2" >No</ion-col>
       <ion-col>Alat</ion-col>
       <ion-col>Jadwal</ion-col>
+      <ion-col>Keterangan</ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid *ngFor="let row of allAlatData; index as i">
     <ion-row (click)="handleClick($event,row)">
       <ion-col size ="2">{{ i + 1 }}</ion-col>
       <ion-col>{{ row?.name }}</ion-col>
+      <ion-col> {{row?.details[0].re_calibration | date:'MM'}}</ion-col>
       <ion-col><ion-button size="small" > {{ row?.details[0].re_calibration }} </ion-button></ion-col>
    </ion-row>
   </ion-grid>

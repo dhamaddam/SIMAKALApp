@@ -73,9 +73,20 @@ export class InputAlatKesehatanService {
       if (data.meta.status == "success"){
         console.log("data sukses disimpan")
       } else {
-        console.log("data sukses disimpan")
+        console.log("data gagal disimpan")
       }
     })
+  }
+
+  sendAndCreateNotificationBPFK(data : any, token:string){
+    this.api.sendAndCreateNotificationBPFK(data , token).then(async (params : any) => {
+      const data = JSON.parse(params)
+      if (data.meta.status == "success"){
+        console.log("data sukses disimpan")
+      } else {
+        console.log("data gagal disimpan")
+      }
+    }) 
   }
 
   

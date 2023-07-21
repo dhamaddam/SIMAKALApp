@@ -79,6 +79,19 @@ export class UpdateKalibrasiPage implements OnInit {
     }
   }
 
+  sendNotificationBPFK(){
+    let param = this.myForm.value
+    try{
+      setTimeout(async() => { 
+        console.log("getAuth(){", this.token)
+        await this.inputAlatKesehatanServices.sendAndCreateNotificationBPFK(param, this.token)
+      
+      }, 1000);
+    } catch (error) {
+      throw(error);
+    }
+  }
+
   placeData (param : any){
     try{
       setTimeout(async() => {
