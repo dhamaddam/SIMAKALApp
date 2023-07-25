@@ -75,11 +75,9 @@ export class JadwalKalibrasiPage implements OnInit {
 
       this.isLoading = false;
       this.global.hideLoader();
+      
     }, 1000);
 
-    this.allAlatData.forEach(element => {
-      console.log("allAlatData details",element)
-    });
   }
 
   handleClick(event : any, param : any){

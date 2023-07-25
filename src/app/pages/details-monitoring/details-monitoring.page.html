@@ -21,6 +21,7 @@
       <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
       <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
       <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
+      <ng-container *ngSwitchCase='"selesai_perbaikan"' [ngTemplateOutlet]="selesaiPerbaikan"></ng-container>
       <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
     </ng-container>
   </ion-row>
@@ -173,6 +174,43 @@
     </ion-grid>
   </ng-template>
 
+  <ng-template #selesaiPerbaikan>
+    <ion-grid >
+      <ion-row class="ion-justify-content-center">
+      <ion-avatar>
+        <ion-icon name="checkmark-circle" ></ion-icon>
+      </ion-avatar>
+      <ion-label class="ion-justify-content-center">Ready</ion-label>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="construct" ></ion-icon>
+        </ion-avatar>
+        <ion-label class="ion-text-center">Dalam Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-avatar>
+            <ion-icon name="thumbs-up-sharp" color="primary"></ion-icon>
+          </ion-avatar>
+          <ion-label color="primary" class="ion-justify-content-center">Selesai Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="close-circle-sharp" ></ion-icon>
+        </ion-avatar>
+        <ion-label >Gagal Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
   <ng-template #Danger>
     <ion-grid >
       <ion-row class="ion-justify-content-center">
@@ -224,6 +262,15 @@
         </ion-item>
       </ion-col>
     </ion-row>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="ctm-font-2 ">Foto Alat</ion-label>
+            <img class="center" [src]="this.global.getSantizeUrl(this.imgUrl)" onError="this.src='assets/download.jpeg'"  alt="" >
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
 
     <ion-row>
       <ion-col>

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkapp=self.webpackChunkapp||[]).push([[5557,2618],{5557:(o,a,t)=>{t.d(a,{l:()=>c});var s=t(6689);let c=(()=>{class e{constructor(){}setExtras(r){this.extras=r}getExtras(){return this.extras}}return e.\u0275fac=function(r){return new(r||e)},e.\u0275prov=s.Yz7({token:e,factory:e.\u0275fac,providedIn:"root"}),e})()}}]);

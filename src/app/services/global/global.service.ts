@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { 
   AlertButton,
   AlertController, 
   LoadingController, 
   ModalController, 
   ModalOptions, 
+  NavController, 
   ToastController } from '@ionic/angular';
 
 @Injectable({
@@ -18,7 +20,9 @@ export class GlobalService {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public sanitizer: DomSanitizer,
+    private navCtrl: NavController,
   ) { }
 
   setLoader() {
@@ -102,5 +106,58 @@ export class GlobalService {
       case 'work': return 'briefcase-outline';
       default: return 'location-outline';
     }
+  }
+  public getSantizeUrl(url : string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+  apiErrorHandler(err: any) {
+    // console.log('Error got in service =>', err)
+    if (err && err.status == 401 && err.error.error) {
+      this.errorToast(err.error.error);
+      this.navCtrl.navigateRoot('/login');
+      return false;
+    }
+    if (err && err.status == 500 && err.error.error) {
+      this.errorToast(err.error.error);
+      return false;
+    }
+    if (err.status == -1) {
+      this.errorToast('Failed To Connect With Server');
+      return false;
+    } else if (err.status == 401) {
+      this.errorToast('Unauthorized Request!');
+      localStorage.removeItem('token');
+      localStorage.removeItem('uid');
+      this.navCtrl.navigateRoot('/login');
+      return false;
+    } else if (err.status == 500) {
+      this.errorToast('Something went wrong');
+      return false;
+    } else if (err.status == 422 && err.error.error) {
+      this.errorToast(err.error.error);
+      return false;
+    } else {
+      this.errorToast('Something went wrong');
+      return false;
+    }
+  }
+  async show(msg?: any) {
+    this.isLoading = true;
+    return await this.loadingCtrl.create({
+      message: msg && msg != '' && msg != null ? msg : '',
+      spinner: 'bubbles',
+    }).then(a => {
+      a.present().then(() => {
+        //console.log('presented');
+        if (!this.isLoading) {
+          a.dismiss().then(() => console.log('abort presenting'));
+        }
+      });
+    });
+  }
+
+  async hide() {
+    this.isLoading = false;
+    return await this.loadingCtrl.dismiss().then(() => console.log('dismissed'));
   }
 }

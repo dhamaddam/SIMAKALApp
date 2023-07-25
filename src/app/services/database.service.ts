@@ -182,6 +182,29 @@ export class DatabaseService {
         })
     })
   }
+  
+  public uploadImage(id: string ,blobData: any, ext: any, token : string): Promise<any> {
+    
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    return new Promise<any>((resolve, reject) => {
+      
+      const formData = new FormData();
+      formData.append('file', blobData,`image.${ext}`);
+      console.log("formData",formData)
+      
+      this.http.post(this.baseUrl + 'deviceDetail/updateCalibrationStatus?id='+id, formData, httpHeader).subscribe((data) => {
+        resolve(JSON.stringify(data));
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 
   getAllAlatKesehatan( token : string){
     
@@ -342,7 +365,6 @@ export class DatabaseService {
   }
 
   updateAlatKesehatanCalibration(id:string, data : any, token : string){
-    console.log("data updateAlatKesehatanCalibration",data)
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

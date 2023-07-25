@@ -29,11 +29,12 @@
           <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
           <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
           <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
+          <ng-container *ngSwitchCase='"selesai_perbaikan"' [ngTemplateOutlet]="selesaiPerbaikan"></ng-container>
           <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
       </ng-container>
        
         <ng-template #Danger>
-          <ion-button size="small" color="danger">Danger</ion-button>
+          <ion-button size="small" color="danger">Tdk Layak</ion-button>
         </ng-template>
         
         <ng-template #sedangDalamPerbaikan>
@@ -41,7 +42,7 @@
         </ng-template>
 
         <ng-template #masaWarning>
-          <ion-button size="small" color="warning">Warning</ion-button>
+          <ion-button size="small" color="warning">Menunggu Spare.</ion-button>
         </ng-template>
         <ng-template #siapPakai>
           <ion-button size="small" color="success">Pakai</ion-button>
@@ -49,6 +50,10 @@
 
         <ng-template #default>
           <ion-button size="small">Default</ion-button>
+        </ng-template>
+
+        <ng-template #selesaiPerbaikan>
+          <ion-button size="small" color="primary">Selesai Perb.</ion-button>
         </ng-template>
       </ion-col>
       

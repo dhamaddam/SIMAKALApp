@@ -29,10 +29,10 @@ export class DetailsMonitoringPage implements OnInit {
   today: any = moment().format("YYYY-MM-DD");
   status_alat : string = ""
   id_alat : string = ""
-  
+  imgUrl : string = ""
   constructor(
     private router: Router, 
-    private global : GlobalService,
+    public global : GlobalService,
     private activatedRoute: ActivatedRoute,
     private inputAlatKesehatanServices : InputAlatKesehatanService, 
     private monitoringAlatServices : MonitoringAlatService,
@@ -64,8 +64,8 @@ export class DetailsMonitoringPage implements OnInit {
         initial_monitoring : [element.details[0].initial_monitoring],
         re_monitoring : [element.details[0].re_monitoring]
       });
-      this.id_alat = element.id
-
+      this.id_alat = element.id_alat
+      this.imgUrl = element.image
       if (element.monitoring_status == null){
         this.myForm.form = "status_belum_diisi"
         this.status_alat = "status_belum_diisi"
