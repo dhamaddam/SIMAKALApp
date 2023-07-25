@@ -11,6 +11,7 @@ import { NavExtrasServiceService } from 'src/app/services/nav-extras-service/nav
   templateUrl: './monitoring-alat.page.html',
   styleUrls: ['./monitoring-alat.page.scss'],
 })
+
 export class MonitoringAlatPage implements OnInit {
 
 
@@ -19,11 +20,8 @@ export class MonitoringAlatPage implements OnInit {
   allContentDummy : any[] = [];
   allContentDummySub : Subscription = new Subscription;
   isLoading: boolean = false;
-
   allAlatData : any[] = [];
   allAlatDataSub : Subscription = new Subscription;
- 
-
   token : any; 
 
   constructor(
@@ -96,7 +94,6 @@ export class MonitoringAlatPage implements OnInit {
   }
 
   handleClick (event : any, param : any){
-    console.log("isi monitoring row", param)
     this.navExtras.setExtras(param)
     this.router.navigateByUrl('details-monitoring');
   }

@@ -64,7 +64,7 @@ export class DetailsMonitoringPage implements OnInit {
         initial_monitoring : [element.details[0].initial_monitoring],
         re_monitoring : [element.details[0].re_monitoring]
       });
-      this.id_alat = element.id_alat
+      this.id_alat = element.id
       this.imgUrl = element.image
       if (element.monitoring_status == null){
         this.myForm.form = "status_belum_diisi"
