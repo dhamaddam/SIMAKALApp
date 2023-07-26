@@ -6,11 +6,13 @@ import { UpdateKalibrasiPageRoutingModule } from './update-kalibrasi-routing.mod
 
 import { UpdateKalibrasiPage } from './update-kalibrasi.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UploaderModule } from "angular-uploader";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    UploaderModule,
     ReactiveFormsModule,
     IonicModule,
     UpdateKalibrasiPageRoutingModule

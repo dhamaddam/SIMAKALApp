@@ -3,6 +3,7 @@ export class Alat {
     constructor(
         public pic: string,
         public name: string,
+        public image : string,
         public serial_no: string,
         public inventory_no: string,
         public room: string,

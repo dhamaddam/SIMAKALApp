@@ -8,6 +8,7 @@ import { SeluruhAlatService } from 'src/app/services/seluruh-alat/seluruh-alat.s
 import { InputAlatKesehatanService } from 'src/app/services/input-alat-kesehatan/input-alat-kesehatan.service';
 import { Alat } from 'src/app/models/alat.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Uploader, UploadWidgetConfig, UploadWidgetResult } from 'uploader';
 
 @Component({
   selector: 'app-input-alat-kesehatan',
@@ -29,9 +30,18 @@ export class InputAlatKesehatanPage implements OnInit {
   
   allAlatKesehatan : any[] = [];
   allAlatKesehatanSubs : Subscription = new Subscription; 
-
   today: any = moment().format("YYYY-MM-DD");
   
+  uploader = Uploader({ apiKey: "public_FW25bYRFasDp9zGButccP2qyeEcZ" }); // Your real API key.
+  options: UploadWidgetConfig = {
+    multi: true
+  };
+  onComplete = (files: UploadWidgetResult[]) => {
+    this.imageLink = files[0]?.fileUrl;
+  };
+  imageLink: string  = "";
+
+
   constructor(
     private global : GlobalService, 
     private fb: FormBuilder,
@@ -110,6 +120,7 @@ export class InputAlatKesehatanPage implements OnInit {
         new Alat(
           param.pic,
           param.nama_alat,
+          this.imageLink,
           param.nomer_seri,
           param.nomer_inventaris,
           param.pilih_instalasi,
@@ -146,6 +157,7 @@ export class InputAlatKesehatanPage implements OnInit {
 
     this.isLoading = false;
     this.global.hideLoader();
+    this.myForm.reset()
   }
 
 }

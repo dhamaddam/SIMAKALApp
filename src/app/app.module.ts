@@ -9,12 +9,16 @@ import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http'
 import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
 import { OneSignalPlugin } from 'onesignal-cordova-plugin';
+import { UploaderModule } from 'angular-uploader';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule, 
+    UploaderModule,
+    PdfViewerModule,
     IonicModule.forRoot(), 
     AppRoutingModule ],
   providers: [OneSignal, OneSignalPlugin, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

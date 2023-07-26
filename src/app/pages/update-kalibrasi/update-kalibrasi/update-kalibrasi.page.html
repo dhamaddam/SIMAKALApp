@@ -55,9 +55,12 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-label class="ctm-font-2">Nama Alat</ion-label>
+          <ion-label class="ctm-font-2">File</ion-label>
           <ion-item>
-              <ion-icon (click)="uploadImage()" name="cloud-upload-outline" slot="end"></ion-icon>
+            <a href="{{ uploadedFileUrl }}" target="_blank">{{ uploadedFileUrl }}</a>
+            <button uploadButton [uploadComplete]="onComplete" [uploadOptions]="options" [uploader]="uploader" >
+              Upload a file...
+            </button>
           </ion-item>
       </ion-col>
       </ion-row>

@@ -6,11 +6,13 @@ import { DetailsMonitoringPageRoutingModule } from './details-monitoring-routing
 
 import { DetailsMonitoringPage } from './details-monitoring.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    PdfViewerModule,
     ReactiveFormsModule,
     IonicModule,
     DetailsMonitoringPageRoutingModule

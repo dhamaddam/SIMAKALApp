@@ -103,19 +103,20 @@
       <ion-row>
         <ion-col>
           <ion-label class="ctm-font-2">Kondisi Alat</ion-label>
-          <ion-list>
-              <ion-item>
-                  <ion-select interface="action-sheet" formControlName="kondisi_alat" placeholder="Bagaimana Kondisi Alat" (ionChange)="handleInstalasi($event)">
-                      <ion-select-option value="layak_pakai">Layak Pakai</ion-select-option>
-                      <ion-select-option value="sedang_dalam_perbaikan">Sedang Dalam Perbaikan</ion-select-option>
-                      <ion-select-option value="menunggu_sparepart">Menunggu Sparepart</ion-select-option>
-                      <ion-select-option value="selesai_perbaikan">Selesai Perbaikan</ion-select-option>
-                      <ion-select-option value="gagal_perbaikan">Gagal Perbaikan</ion-select-option>
-                  </ion-select>
-              </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
+            <ion-list>
+                <ion-item>
+                    <ion-select interface="action-sheet" formControlName="kondisi_alat" placeholder="Bagaimana Kondisi Alat" (ionChange)="handleInstalasi($event)">
+                        <ion-select-option value="layak_pakai">Layak Pakai</ion-select-option>
+                        <ion-select-option value="sedang_dalam_perbaikan">Sedang Dalam Perbaikan</ion-select-option>
+                        <ion-select-option value="menunggu_sparepart">Menunggu Sparepart</ion-select-option>
+                        <ion-select-option value="sedang_dalam_perbaikan">Sedang dalam Perbaikan</ion-select-option>
+                        <ion-select-option value="selesai_perbaikan">Selesai Perbaikan</ion-select-option>
+                        <ion-select-option value="gagal_perbaikan">Gagal Perbaikan</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
       </ion-grid>
 
       <ion-grid>
@@ -202,11 +203,25 @@
         <ion-col>
             <ion-label class="ctm-font-2">Monitoring Ulang</ion-label>
             <ion-item>
-              <ion-input formControlName="monitoring_ulang" class="ion-text-end"></ion-input>
+              <ion-input formControlName="monitoring_ulang" ></ion-input>
             </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="ctm-font-2">File</ion-label>
+          <ion-item>
+            <a href="{{ imageLink }}" target="_blank">{{ imageLink }}</a>
+            <button uploadButton [uploadComplete]="onComplete" [uploadOptions]="options" [uploader]="uploader" >
+              Upload a file...
+            </button>
+          </ion-item>
+      </ion-col>
+      </ion-row>
+    </ion-grid>  
 
     <ion-grid>
       <ion-row>

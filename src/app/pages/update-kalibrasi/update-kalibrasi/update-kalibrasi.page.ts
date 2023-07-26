@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { NavExtrasServiceService } from 'src/app/services/nav-extras-service/nav-extras-service.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController, IonicModule } from '@ionic/angular';
+import { Uploader, UploadWidgetConfig, UploadWidgetResult } from 'uploader';
 
 @Component({
   selector: 'app-update-kalibrasi',
@@ -31,6 +32,15 @@ export class UpdateKalibrasiPage implements OnInit {
   image_ext : string = ""
   blobData : any;
   messageMonth : any = ""
+  
+  uploader = Uploader({ apiKey: "public_FW25bYRFasDp9zGButccP2qyeEcZ" }); // Your real API key.
+  options: UploadWidgetConfig = {
+    multi: true
+  };
+  onComplete = (files: UploadWidgetResult[]) => {
+    this.uploadedFileUrl = files[0]?.fileUrl;
+  };
+  uploadedFileUrl: string | undefined = undefined;
 
   constructor(
     private router: Router, 
@@ -44,6 +54,7 @@ export class UpdateKalibrasiPage implements OnInit {
 
   ngOnInit(
   ) {
+    
     this.getAuth();
     this.allDataAlatKesehatanById = this.navExtras.getExtras()
     this.resultData.push(this.navExtras.getExtras())
@@ -63,11 +74,10 @@ export class UpdateKalibrasiPage implements OnInit {
         re_calibration : [element.details[0].re_calibration],
         initial_monitoring : [element.details[0].initial_monitoring],
         re_monitoring : [element.details[0].re_monitoring],
-      
       });
+
       this.messageMonth = element.details[0].month_diff
       this.messageMonth =  this.messageMonth > 6  ? false : true
-      console.log("this.messageMonth",this.messageMonth)
       this.id_alat = element.id
       this.imgUrl = element.image
       if (element.calibration_status == null){
@@ -174,7 +184,7 @@ export class UpdateKalibrasiPage implements OnInit {
     try{
       setTimeout(async() => {
         await this.inputAlatKesehatanServices.updateAlatKesehatanCalibration(this.id_alat,param, this.token)
-        await this.inputAlatKesehatanServices.uploadImage(this.id_alat,this.blobData, this.image_ext, this.token)
+        // await this.inputAlatKesehatanServices.uploadImage(this.id_alat,this.blobData, this.image_ext, this.token)
         this.isLoading = false;
         this.global.hideLoader();
         // this.router.navigateByUrl('/menu/monitoring-alat', { replaceUrl: true });
@@ -193,9 +203,12 @@ export class UpdateKalibrasiPage implements OnInit {
     this.global.showLoader();
     
     console.log(this.myForm.value)
+
+    this.myForm.value.file = this.uploadedFileUrl
     this.placeData(this.myForm.value)
 
     this.isLoading = false;
     this.global.hideLoader();
   }
 }
+

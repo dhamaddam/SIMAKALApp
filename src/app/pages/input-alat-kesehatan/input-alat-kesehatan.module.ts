@@ -7,12 +7,14 @@ import { InputAlatKesehatanPageRoutingModule } from './input-alat-kesehatan-rout
 
 import { InputAlatKesehatanPage } from './input-alat-kesehatan.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UploaderModule } from "angular-uploader";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    UploaderModule,
     IonicModule,
     InputAlatKesehatanPageRoutingModule
   ],

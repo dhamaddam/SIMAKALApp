@@ -32,7 +32,7 @@
       <ion-avatar>
         <ion-icon name="checkmark-circle" ></ion-icon>
       </ion-avatar>
-      <ion-label class="ion-justify-content-center">Ready</ion-label>
+      <ion-label class="ion-justify-content-center">Siap Pakai</ion-label>
       </ion-row>
     </ion-grid>
   
@@ -161,7 +161,7 @@
           <ion-avatar>
             <ion-icon name="thumbs-up-sharp" color="primary"></ion-icon>
           </ion-avatar>
-          <ion-label color="primary" class="ion-justify-content-center">Selesai Perbaikan</ion-label>
+          <ion-label color="primary" class="ion-justify-content-center">Sedang Dalam Perbaikan</ion-label>
       </ion-row>
     </ion-grid>
     <ion-grid>
@@ -333,6 +333,13 @@
             <ion-input [readonly]="true" type="text" value="{{row?.owner.name}}"></ion-input>
         </ion-item>
       </ion-col>
+    </ion-row>
+    <ion-row>
+      <pdf-viewer [src]="pdfSrc"
+              [render-text]="true"
+              [original-size]="false"
+              style="width: 400px; height: 500px" >
+      </pdf-viewer>
     </ion-row>
   </ion-grid>
       <ion-row>

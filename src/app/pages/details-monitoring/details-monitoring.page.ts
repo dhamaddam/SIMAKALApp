@@ -17,6 +17,7 @@ import { NavExtrasServiceService } from 'src/app/services/nav-extras-service/nav
 })
 export class DetailsMonitoringPage implements OnInit {
 
+  pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   param: any;
   myForm : any;
   isLoading: boolean = false;
@@ -64,6 +65,7 @@ export class DetailsMonitoringPage implements OnInit {
         initial_monitoring : [element.details[0].initial_monitoring],
         re_monitoring : [element.details[0].re_monitoring]
       });
+      this.pdfSrc = element.details[0].file
       this.id_alat = element.id
       this.imgUrl = element.image
       if (element.monitoring_status == null){
