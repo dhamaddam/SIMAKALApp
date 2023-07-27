@@ -25,7 +25,7 @@
           <ion-list>
               <ion-item>
                   <ion-select formControlName="pilih_instalasi" placeholder="Silahkan Masukkan Instalasi" (ionChange)="handleInstalasi($event)">
-                      <ion-select-option *ngFor="let instalasi of allInstalasi" value="{{instalasi?.id}}">{{instalasi?.name}}</ion-select-option>
+                      <ion-select-option *ngFor="let instalasi of allInstalasi" value="{{instalasi?.name}}">{{instalasi?.name}}</ion-select-option>
                   </ion-select>
               </ion-item>
           </ion-list>
@@ -159,7 +159,14 @@
           <ion-col>
               <ion-label class="ctm-font-2">Kalibrasi Awal</ion-label>
               <ion-item>
-                <ion-input type="text" formControlName="kalibrasi_awal"></ion-input>
+                
+                <ion-datetime-button datetime="datetime1"></ion-datetime-button>
+  
+                <ion-modal [keepContentsMounted]="true">
+                  <ng-template>
+                    <ion-datetime id="datetime1" presentation="date" [showDefaultButtons]="true" [value]="dateValue" formControlName="kalibrasi_awal"></ion-datetime>
+                  </ng-template>
+                </ion-modal>
               </ion-item>
           </ion-col>
       </ion-row>
@@ -170,7 +177,12 @@
         <ion-col>
             <ion-label class="ctm-font-2">Kalibrasi Ulang</ion-label>
             <ion-item>
-              <ion-input type="text" formControlName="kalibrasi_ulang"></ion-input>
+              <ion-datetime-button datetime="datetime2"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="datetime2" presentation="date"[showDefaultButtons]="true"[value]="dateValue" formControlName="kalibrasi_ulang"></ion-datetime>
+                </ng-template>
+              </ion-modal>
             </ion-item>
         </ion-col>
       </ion-row>
@@ -181,7 +193,28 @@
         <ion-col>
             <ion-label class="ctm-font-2">Monitoring Awal</ion-label>
             <ion-item>
-              <ion-input type="text" formControlName="monitoring_awal"></ion-input>
+              <ion-datetime-button datetime="datetime3" color="tertiary"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="datetime3" presentation="date" [showDefaultButtons]="true" [value]="dateValue" formControlName="monitoring_awal"></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-label class="ctm-font-2">Monitoring Ulang</ion-label>
+            <ion-item>
+              <ion-datetime-button datetime="datetime" color="tertiary"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="datetime" presentation="date" [showDefaultButtons]="true"[value]="dateValue" formControlName="monitoring_ulang"></ion-datetime>
+                </ng-template>
+              </ion-modal>
             </ion-item>
         </ion-col>
       </ion-row>
@@ -198,16 +231,7 @@
       </ion-row>
     </ion-grid>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-            <ion-label class="ctm-font-2">Monitoring Ulang</ion-label>
-            <ion-item>
-              <ion-input formControlName="monitoring_ulang" ></ion-input>
-            </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    
 
     <ion-grid>
       <ion-row>

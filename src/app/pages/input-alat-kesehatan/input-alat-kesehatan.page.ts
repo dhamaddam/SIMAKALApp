@@ -9,6 +9,7 @@ import { InputAlatKesehatanService } from 'src/app/services/input-alat-kesehatan
 import { Alat } from 'src/app/models/alat.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Uploader, UploadWidgetConfig, UploadWidgetResult } from 'uploader';
+import { format } from 'date-fns'
 
 @Component({
   selector: 'app-input-alat-kesehatan',
@@ -40,7 +41,7 @@ export class InputAlatKesehatanPage implements OnInit {
     this.imageLink = files[0]?.fileUrl;
   };
   imageLink: string  = "";
-
+  dateValue = format(new Date(), 'yyyy-MM-dd');
 
   constructor(
     private global : GlobalService, 
@@ -62,10 +63,10 @@ export class InputAlatKesehatanPage implements OnInit {
       nomer_inventaris: ['', ],
       merk_type: ['', ],
       kondisi_alat: ['', ],
-      kalibrasi_awal: ['', ],
-      kalibrasi_ulang: ['', ],
-      monitoring_awal: ['', ],
-      monitoring_ulang: ['', ],
+      kalibrasi_awal: [this.dateValue, ],
+      kalibrasi_ulang: [this.dateValue, ],
+      monitoring_awal: [this.dateValue, ],
+      monitoring_ulang: [this.dateValue, ],
       calibration_status: ['',],
       owner: ['',],
       pic: ['',],
