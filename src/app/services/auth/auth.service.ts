@@ -32,7 +32,8 @@ export class AuthService {
     this.DB.getLogin(email, password).then (async (res : any) => {
       
       const data = JSON.parse(res)
-      if(data.meta.status == 'success'){ 
+      console.log("data getLogin",data)
+      if(data.meta.status === 'success'){ 
         await loading.dismiss();
         let result =  data.data.user
         result.access_token = data.data.access_token
@@ -77,12 +78,7 @@ export class AuthService {
       }
     }).catch ( async (e) => {
       await loading.dismiss();
-        const alert = await this.alertController.create({
-          header: 'Login failed',
-          message: JSON.stringify(e),
-          buttons: ['OK'],
-        });
-        await alert.present();
+      console.log("status", e)
       throw(e)
     })
     await loading.dismiss();
