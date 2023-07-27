@@ -60,6 +60,7 @@ export class DetailsMonitoringPage implements OnInit {
         type : [element.type,],
         calibration_status: [element.calibration_status,],
         owner_id : [element.owner_id,],
+        image : [element.image],
         initial_calibration : [element.details[0].initial_calibration,],
         re_calibration : [element.details[0].re_calibration],
         initial_monitoring : [element.details[0].initial_monitoring],

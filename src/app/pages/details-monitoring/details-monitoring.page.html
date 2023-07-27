@@ -78,7 +78,7 @@
         <ion-avatar>
           <ion-icon name="construct" color="warning"></ion-icon>
         </ion-avatar>
-        <ion-label color="warning" class="ion-text-center">Dalam Perbaikan</ion-label>
+        <ion-label color="warning" class="ion-text-center">Menunggu Sparepart</ion-label>
       </ion-row>
     </ion-grid>
 
@@ -138,6 +138,43 @@
   </ng-template>
 
   <ng-template #sedangDalamPerbaikan>
+    <ion-grid >
+      <ion-row class="ion-justify-content-center">
+      <ion-avatar>
+        <ion-icon name="checkmark-circle" ></ion-icon>
+      </ion-avatar>
+      <ion-label class="ion-justify-content-center">Ready</ion-label>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="construct" ></ion-icon>
+        </ion-avatar>
+        <ion-label class="ion-text-center">Dalam Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-avatar>
+            <ion-icon name="thumbs-up-sharp" color="primary"></ion-icon>
+          </ion-avatar>
+          <ion-label color="primary" class="ion-justify-content-center">Sedang Dalam Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <ion-icon name="close-circle-sharp" ></ion-icon>
+        </ion-avatar>
+        <ion-label >Gagal Perbaikan</ion-label>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
+  <ng-template #menungguSparepart>
     <ion-grid >
       <ion-row class="ion-justify-content-center">
       <ion-avatar>
