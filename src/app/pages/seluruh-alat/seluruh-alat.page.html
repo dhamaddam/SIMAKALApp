@@ -11,19 +11,59 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-grid >
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ng-container [ngSwitch]="roles" >
+      <ng-container *ngSwitchCase="'ADMIN'" [ngTemplateOutlet]="nameDefault"></ng-container>
+      <ng-container *ngSwitchCase="'KATIM'" [ngTemplateOutlet]="nameDefault"></ng-container>
+      <ng-container *ngSwitchCase="'BPFK'" [ngTemplateOutlet]="nameDefault"></ng-container>
+      
+      <ng-template #nameDefault>
+        <ion-row>
+          <ion-col>
+            <ion-label class="ctm-font-2">Pilih Instalasi</ion-label>
+            <ion-list>
+                <ion-item>
+                    <ion-select placeholder="Silahkan Masukkan Instalasi" (ionChange)="handleInstalasi($event)">
+                        <ion-select-option *ngFor="let instalasi of allInstalasi" value="{{instalasi?.name}}">{{instalasi?.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+          </ion-col>
+         </ion-row>
+      </ng-template>
+    </ng-container>
+    
+  </ion-grid>
+
+  <ion-grid>
     <ion-row>
       <ion-col size ="2" >No</ion-col>
       <ion-col>Alat</ion-col>
-       <ion-col>Status</ion-col>
+      <ion-col>Status</ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid >
     <ion-row *ngFor="let row of allAlatData; index as i">
       <ion-col size ="2">{{ i + 1 }}</ion-col>
-      <ion-col>{{ row?.name }}</ion-col>
-       <ion-col>
+      <ion-col>
+        <ng-container [ngSwitch]="row?.owner_id" >
+          <ng-container *ngSwitchCase="'1'" [ngTemplateOutlet]="nameDefault"></ng-container>
+          <ng-container *ngSwitchDefault [ngTemplateOutlet]="kso"></ng-container>
+
+          <ng-template #nameDefault>
+            <ion-label size="small" color="dark"> {{ row?.name }}</ion-label>
+          </ng-template>
+
+          <ng-template #kso>
+            <ion-label size="small" color="primary"> {{ row?.name }}</ion-label>
+          </ng-template>
+        </ng-container>
+      </ion-col>
+      <ion-col>
         <ng-container [ngSwitch]="row?.monitoring_status">
           <ng-container *ngSwitchCase=null [ngTemplateOutlet]="default"></ng-container>
           <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
@@ -31,7 +71,7 @@
           <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
           <ng-container *ngSwitchCase='"selesai_perbaikan"' [ngTemplateOutlet]="selesaiPerbaikan"></ng-container>
           <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
-      </ng-container>
+        </ng-container>
        
         <ng-template #Danger>
           <ion-button size="small" color="danger">Tdk Layak</ion-button>

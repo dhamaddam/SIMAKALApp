@@ -40,7 +40,18 @@ export class InputAlatKesehatanPage implements OnInit {
   onComplete = (files: UploadWidgetResult[]) => {
     this.imageLink = files[0]?.fileUrl;
   };
+
+  //
+  uploaderCertificate = Uploader({ apiKey: "public_FW25bYRFasDp9zGButccP2qyeEcZ" });
+  optionsCertificate: UploadWidgetConfig = {
+    multi: true
+  };
+  onCompleteCertificate = (files: UploadWidgetResult[]) => {
+    this.certificateLink = files[0]?.fileUrl;
+  };
+
   imageLink: string  = "";
+  certificateLink : string  = ""
   dateValue = format(new Date(), 'yyyy-MM-dd');
 
   constructor(
@@ -70,6 +81,7 @@ export class InputAlatKesehatanPage implements OnInit {
       calibration_status: ['',],
       owner: ['',],
       pic: ['',],
+      label : ['',]
     });
 
     this.allInstalasiSubs = this.seluruhAlatServices.allAllInstalasi.subscribe( result => {

@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { GlobalService } from 'src/app/services/global/global.service';
 import { JadwalKalibrasiService } from 'src/app/services/jadwal-kalibrasi/jadwal-kalibrasi.service';
 import { NavExtrasServiceService } from 'src/app/services/nav-extras-service/nav-extras-service.service';
+import { SeluruhAlatService } from 'src/app/services/seluruh-alat/seluruh-alat.service';
 
 @Component({
   selector: 'app-jadwal-kalibrasi',
@@ -23,18 +24,24 @@ export class JadwalKalibrasiPage implements OnInit {
   allAlatData : any[] = [];
   today: any = moment().format("YYYY-MM-DD");
   allAlatDataSub : Subscription = new Subscription;
+  roles : any;
+
+
+  allInstalasi : any[] = [];
+  _allAlatData : any[] = [];
+  allInstalasiSubs: Subscription = new Subscription;
   
   constructor(
     private global : GlobalService,
     private jadwalKalibrasiServices : JadwalKalibrasiService,
     private authServices : AuthService,
     private router: Router, 
+    private seluruhAlatServices : SeluruhAlatService,
     private fb: FormBuilder,
     private navExtras : NavExtrasServiceService
   ) { }
 
   ngOnInit() {
-
     this.myForm = this.fb.group({ 
       tanggal: [this.today, [Validators.required]],
       pilih_instalasi: ['', ],
@@ -42,9 +49,18 @@ export class JadwalKalibrasiPage implements OnInit {
 
     this.getAuth();
 
+    this.allInstalasiSubs = this.seluruhAlatServices.allAllInstalasi.subscribe( result => {
+      if (result instanceof Array){
+        this.allInstalasi = result;
+      } else {
+        this.allInstalasi = this.allInstalasi.concat(result);
+      }
+    })
+
     this.allAlatDataSub = this.jadwalKalibrasiServices.allDataAlatKesehatan.subscribe(data => {
       if (data instanceof Array){
         this.allAlatData = data;
+        this._allAlatData = data;
       } else {
         this.allAlatData = this.allAlatData.concat(data);
       }
@@ -55,12 +71,18 @@ export class JadwalKalibrasiPage implements OnInit {
    
   }
 
+  handleInstalasi(event : any) {
+    let currentAlat = this._allAlatData
+    currentAlat = currentAlat.filter(x => x.room == event.detail.value);
+    this.allAlatData = currentAlat
+  }
+
   async getAuth(){
     const val = await this.authServices.getId();
     
     if(val){
       let data = JSON.parse(val)
-      console.log("this.token", data.access_token)
+      this.roles = data.role
       this.token = data.access_token
     }
    
@@ -72,6 +94,7 @@ export class JadwalKalibrasiPage implements OnInit {
     
     setTimeout(async() => {
       await this.jadwalKalibrasiServices.getSeluruhAlatData(this.token);
+      await this.seluruhAlatServices.getInstalasi();
 
       this.isLoading = false;
       this.global.hideLoader();
@@ -91,6 +114,7 @@ export class JadwalKalibrasiPage implements OnInit {
       this.allAlatDataSub = this.jadwalKalibrasiServices.allDataAlatKesehatan.subscribe(data => {
         if (data instanceof Array){
           this.allAlatData = data;
+          this._allAlatData = data;
         } else {
           this.allAlatData = this.allAlatData.concat(data);
         }

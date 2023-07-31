@@ -16,50 +16,83 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-grid [fixed]="true">
+    <ng-container [ngSwitch]="roles" >
+      <ng-container *ngSwitchCase="'ADMIN'" [ngTemplateOutlet]="nameDefault"></ng-container>
+      <ng-container *ngSwitchCase="'KATIM'" [ngTemplateOutlet]="nameDefault"></ng-container>
+      <ng-container *ngSwitchCase="'BPFK'" [ngTemplateOutlet]="nameDefault"></ng-container>
+      
+      <ng-template #nameDefault>
+        <ion-row>
+          <ion-col>
+            <ion-label class="ctm-font-2">Pilih Instalasi</ion-label>
+            <ion-list>
+                <ion-item>
+                    <ion-select placeholder="Silahkan Masukkan Instalasi" (ionChange)="handleInstalasi($event)">
+                        <ion-select-option *ngFor="let instalasi of allInstalasi" value="{{instalasi?.name}}">{{instalasi?.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+          </ion-col>
+         </ion-row>
+      </ng-template>
+    </ng-container>
+    
     <ion-row>
-      <ion-col size ="2" >No</ion-col>
+      <ion-col  size ="2">No</ion-col>
       <ion-col>Alat</ion-col>
       <ion-col>Jadwal</ion-col>
-      <!-- <ion-col>Keterangan</ion-col> -->
     </ion-row>
   </ion-grid>
   <ion-grid *ngFor="let row of allAlatData; index as i">
     <ion-row (click)="handleClick($event,row)">
-      <ion-col size ="2">{{ i + 1 }}</ion-col>
-      <ion-col>{{ row?.name }} </ion-col>
+      <ion-col  size ="2">{{ i + 1 }}</ion-col>
+      <ion-col>
+        <ng-container [ngSwitch]="row?.owner_id" >
+          <ng-container *ngSwitchCase="'1'" [ngTemplateOutlet]="nameDefault"></ng-container>
+          <ng-container *ngSwitchDefault [ngTemplateOutlet]="kso"></ng-container>
+
+          <ng-template #nameDefault>
+            <ion-label size="small" color="dark"> {{ row?.name }}</ion-label>
+          </ng-template>
+
+          <ng-template #kso>
+            <ion-label size="small" color="primary"> {{ row?.name }}</ion-label>
+          </ng-template>
+        </ng-container>
+      </ion-col>
       <ion-col>
 
         <ng-container [ngSwitch]="row?.details[0].month_diff"> 
-          
           <ng-container *ngSwitchCase='12' [ngTemplateOutlet]="siapPakai"></ng-container>
           <ng-container *ngSwitchCase='11' [ngTemplateOutlet]="siapPakai"></ng-container>
           <ng-container *ngSwitchCase='10' [ngTemplateOutlet]="siapPakai"></ng-container>
           <ng-container *ngSwitchCase='9' [ngTemplateOutlet]="siapPakai"></ng-container>
           <ng-container *ngSwitchCase='8' [ngTemplateOutlet]="siapPakai"></ng-container>
           <ng-container *ngSwitchCase='7' [ngTemplateOutlet]="siapPakai"></ng-container>
-          <ng-container *ngSwitchCase='6' [ngTemplateOutlet]="masaWarning"></ng-container>
-          <ng-container *ngSwitchCase='5' [ngTemplateOutlet]="masaWarning"></ng-container>
-          <ng-container *ngSwitchCase='4' [ngTemplateOutlet]="masaWarning"></ng-container>
-          <ng-container *ngSwitchCase='3' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
-          <ng-container *ngSwitchCase='2' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
+          <ng-container *ngSwitchCase='6' [ngTemplateOutlet]="siapPakai"></ng-container>
+          <ng-container *ngSwitchCase='5' [ngTemplateOutlet]="siapPakai"></ng-container>
+          <ng-container *ngSwitchCase='4' [ngTemplateOutlet]="siapPakai"></ng-container>
+          <ng-container *ngSwitchCase='3' [ngTemplateOutlet]="masaWarning"></ng-container>
+          <ng-container *ngSwitchCase='2' [ngTemplateOutlet]="masaWarning"></ng-container>
           <ng-container *ngSwitchCase='1' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
           <ng-container *ngSwitchCase='0' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
           <ng-container *ngSwitchDefault="" [ngTemplateOutlet]="default"></ng-container>
         </ng-container>
 
         <ng-template #masaWarning>
-          <ion-button size="small" color="warning" >{{row?.details[0].date_diff + " Hari Lagi"}}</ion-button>
+          <ion-button size="small" color="warning" >{{row?.details[0].month_diff + " Bulan Lagi"}}</ion-button>
         </ng-template>
+
         <ng-template #default>
-          <ion-button size="small" >{{row?.details[0].date_diff + " Hari Lagi"}}</ion-button>
+          <ion-button size="small" >{{row?.details[0].month_diff + " Bulan Lagi"}}</ion-button>
         </ng-template>
 
         <ng-template #sedangDalamPerbaikan>
-          <ion-button size="small" color="danger" >{{row?.details[0].date_diff + " Hari Lagi"}}</ion-button>
+          <ion-button size="small" color="danger" >{{row?.details[0].month_diff + " Bulan Lagi"}}</ion-button>
         </ng-template>
 
         <ng-template #siapPakai>
-          <ion-button size="small" color="success" >{{row?.details[0].date_diff + " Hari Lagi"}}</ion-button>
+          <ion-button size="small" color="success" >{{row?.details[0].month_diff + " Bulan Lagi"}}</ion-button>
         </ng-template>
 
       </ion-col>

@@ -236,7 +236,32 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-label class="ctm-font-2">File</ion-label>
+          <ion-label class="ctm-font-2">Sertifikat</ion-label>
+          <ion-item>
+            <a href="{{ certificateLink }}" target="_blank">{{ certificateLink }}</a>
+            <button uploadButton [uploadComplete]="onCompleteCertificate" [uploadOptions]="optionsCertificate" [uploader]="uploaderCertificate" >
+              Upload a file...
+            </button>
+          </ion-item>
+      </ion-col>
+      </ion-row>
+    </ion-grid>  
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-label class="ctm-font-2">Label</ion-label>
+            <ion-item>
+              <ion-input type="text" formControlName="label"></ion-input>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label class="ctm-font-2">Foto</ion-label>
           <ion-item>
             <a href="{{ imageLink }}" target="_blank">{{ imageLink }}</a>
             <button uploadButton [uploadComplete]="onComplete" [uploadOptions]="options" [uploader]="uploader" >

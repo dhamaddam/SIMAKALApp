@@ -5,6 +5,7 @@ import { MonitoringAlatService } from 'src/app/services/monitoring-alat/monitori
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NavExtrasServiceService } from 'src/app/services/nav-extras-service/nav-extras-service.service';
+import { SeluruhAlatService } from 'src/app/services/seluruh-alat/seluruh-alat.service';
 
 @Component({
   selector: 'app-monitoring-alat',
@@ -23,6 +24,12 @@ export class MonitoringAlatPage implements OnInit {
   allAlatData : any[] = [];
   allAlatDataSub : Subscription = new Subscription;
   token : any; 
+  roles : any;
+
+  allInstalasi : any[] = [];
+  _allAlatData : any[] = [];
+  allInstalasiSubs: Subscription = new Subscription;
+  
 
   constructor(
     private global : GlobalService,
@@ -30,13 +37,30 @@ export class MonitoringAlatPage implements OnInit {
     private activatedRoute: ActivatedRoute, 
     private authServices : AuthService,
     private router: Router, 
+    private seluruhAlatServices : SeluruhAlatService,
     private navExtras : NavExtrasServiceService
   ) { 
 
   }
 
+  handleInstalasi(event : any) {
+    console.log("event id",event.detail.value)
+    let currentAlat = this._allAlatData
+    currentAlat = currentAlat.filter(x => x.room == event.detail.value);
+    this.allAlatData = currentAlat
+  }
+
   ngOnInit() {
     this.getAuth();
+
+    this.allInstalasiSubs = this.seluruhAlatServices.allAllInstalasi.subscribe( result => {
+      if (result instanceof Array){
+        this.allInstalasi = result;
+      } else {
+        this.allInstalasi = this.allInstalasi.concat(result);
+      }
+    })
+
     this.allContentDummySub = this.monitoringAlatServices.allContentDummy.subscribe(data => {
       if (data instanceof Array){
         this.allContentDummy = data;
@@ -48,6 +72,7 @@ export class MonitoringAlatPage implements OnInit {
     this.allAlatDataSub = this.monitoringAlatServices.allDataAlatKesehatan.subscribe(data => {
       if (data instanceof Array){
         this.allAlatData = data;
+        this._allAlatData = data;
       } else {
         this.allAlatData = this.allAlatData.concat(data);
       }
@@ -61,7 +86,7 @@ export class MonitoringAlatPage implements OnInit {
     const val = await this.authServices.getId();
     if(val){
       let data = JSON.parse(val)
-      console.log("this.token", data.access_token)
+      this.roles = data.role
       this.token = data.access_token
     }
   }
@@ -86,6 +111,7 @@ export class MonitoringAlatPage implements OnInit {
     // this.isLoading = true;
     // this.global.showLoader();
     setTimeout(async() => {
+      await this.seluruhAlatServices.getInstalasi();
       await this.monitoringAlatServices.getContentDummy();
       await this.monitoringAlatServices.getSeluruhAlatData(this.token);
       this.isLoading = false;

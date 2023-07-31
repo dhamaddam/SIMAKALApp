@@ -47,6 +47,8 @@ export class AuthService {
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else if (result.role == "BPFK"){ 
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
+        } else if (result.role == "KATIM"){ 
+          this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         } else {
           this.router.navigateByUrl('/menu/dashboard', { replaceUrl: true });
         }

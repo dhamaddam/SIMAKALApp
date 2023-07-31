@@ -102,20 +102,20 @@ export class DatabaseService {
       },
       {
         "id": "02",
-        "name": "HD",
-        "full_name": "Hemodialisis",
+        "name": "Heamodialisa",
+        "full_name": "Heamodialisa",
         "status" : 1
       },
       {
         "id": "03",
-        "name": "Patologi",
+        "name": "Patologi Klinik",
         "full_name": "Patologi Klinik",
         "status" : 1
       },
       {
         "id": "04",
-        "name": "Rawat Inap Anggrek",
-        "full_name": "Rawat Inap Anggrek",
+        "name": "Anggrek 1",
+        "full_name": "Anggrek 1",
         "status" : 1
       }, 
       {
