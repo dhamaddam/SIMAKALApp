@@ -51,7 +51,6 @@ export class SeluruhAlatPage implements OnInit {
       }
     })
     this.getAllData()
-    console.log("roles",this.roles)
   }
 
   handleInstalasi(event : any) {

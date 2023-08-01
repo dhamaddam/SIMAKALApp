@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -121,12 +121,24 @@ export class MenuPage implements OnInit {
 
   constructor(
     private authServices : AuthService,
-    private navCtrl: NavController
-    
+    private navCtrl: NavController,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
     this.check_login()
+  }
+
+  async about(){
+    const alert = await this.alertController.create({
+      header: 'SIMAKAL Copyright © 2023 ',
+      subHeader: '@dhamaddam and friends All rights reserved.',
+      message: 'With-Tia',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+
   }
 
   async check_login (){
