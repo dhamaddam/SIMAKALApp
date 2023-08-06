@@ -80,6 +80,13 @@ export class DetailsMonitoringPage implements OnInit {
     });
     console.log("this.status_alat",this.status_alat)
   }
+  formClose(){
+    this.router.navigate(['/menu/monitoring-alat'], {
+      // queryParams: {
+      //   param: x
+      // }
+      });
+  }
 
   placeData (param : any){
     try{

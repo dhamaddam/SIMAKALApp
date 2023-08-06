@@ -61,7 +61,6 @@
         </ng-container>
       </ion-col>
       <ion-col>
-
         <ng-container [ngSwitch]="row?.details[0].month_diff"> 
           <ng-container *ngSwitchCase='12' [ngTemplateOutlet]="siapPakai"></ng-container>
           <ng-container *ngSwitchCase='11' [ngTemplateOutlet]="siapPakai"></ng-container>

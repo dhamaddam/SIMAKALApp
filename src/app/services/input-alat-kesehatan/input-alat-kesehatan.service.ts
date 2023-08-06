@@ -89,6 +89,17 @@ export class InputAlatKesehatanService {
     }) 
   }
 
+  sendAndCreateNotificationINSTALASI(data : any, token:string){
+    this.api.sendAndCreateNotificationINSTALASI(data , token).then(async (params : any) => {
+      const data = JSON.parse(params)
+      if (data.meta.status == "success"){
+        console.log("data sukses disimpan")
+      } else {
+        console.log("data gagal disimpan")
+      }
+    }) 
+  }
+
   uploadImage(id: string, blobData : any, ext : any, token : string){
     this.api.uploadImage(id,blobData,ext,token).then(async (params : any) => {
       console.log('image upload', params);

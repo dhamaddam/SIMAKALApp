@@ -32,7 +32,8 @@ export class UpdateKalibrasiPage implements OnInit {
   image_ext : string = ""
   blobData : any;
   messageMonth : any = ""
-  
+  roles : any;
+
   uploader = Uploader({ apiKey: "public_FW25bYRFasDp9zGButccP2qyeEcZ" }); // Your real API key.
   options: UploadWidgetConfig = {
     multi: true
@@ -91,12 +92,20 @@ export class UpdateKalibrasiPage implements OnInit {
 
     });
   }
+  formClose(){
+    this.router.navigate(['/menu/jadwal-kalibrasi'], {
+      // queryParams: {
+      //   param: x
+      // }
+      });
+  }
 
   async getAuth(){
     const val = await this.authServices.getId();
     if(val){
       let data = JSON.parse(val)
       console.log("this.token", data.access_token)
+      this.roles = data.role
       this.token = data.access_token
     }
   }
@@ -107,6 +116,19 @@ export class UpdateKalibrasiPage implements OnInit {
       setTimeout(async() => { 
         console.log("getAuth(){", this.token)
         await this.inputAlatKesehatanServices.sendAndCreateNotificationBPFK(param, this.token)
+      
+      }, 1000);
+    } catch (error) {
+      throw(error);
+    }
+  }
+
+  sendNotificationADMIN(){
+    let param = this.myForm.value
+    try{
+      setTimeout(async() => { 
+        console.log("getAuth(){", this.token)
+        await this.inputAlatKesehatanServices.sendAndCreateNotificationINSTALASI(param, this.token)
       
       }, 1000);
     } catch (error) {

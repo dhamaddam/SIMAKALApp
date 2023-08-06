@@ -506,4 +506,99 @@ export class DatabaseService {
         })
       })
   }
+
+  sendAndCreateNotificationINSTALASI(data : any, token : string){
+
+    console.log("data sendAndCreateNotificationBPFK",data)
+    var date = new Date(data.re_calibration);
+    let params = {
+      'roles' : ["ADMIN","KSO"],
+      'title' : 'Notifikasi Kalibrasi Alat',
+      'link' : '/menu/jadwal-kalibrasi' ,
+      'device_id' : data.id,
+      'message' : data.name + " Memasuki Tanggal Expired Untuk Dikalibrasi Ulang Tanggal "+date.toLocaleString("en-ID"),
+    };
+
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl+'notification/createForRoles', params, httpHeader).subscribe(result => {
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            // reject(err);
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("key incorect!");
+            } else if (err.status == 404) { 
+              console.log("Not Found");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+      })
+  }
+
+  deleteAlatByID(id: any, token:any){
+
+     const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.baseUrl+'medicalDevice/delete?id='+id, httpHeader).subscribe(result => {
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            // reject(err);
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("key incorect!");
+            } else if (err.status == 404) { 
+              console.log("Not Found");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+      })
+  }
+
+  getDataDashboard(token : string) {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': this.key,
+        'Authorization' : `Bearer ${token}`
+      })
+    };
+    return new Promise((resolve, reject) => {
+      this.http.get(this.baseUrl+'dashboard', httpHeader).subscribe( result => {
+        resolve(JSON.stringify(result))
+      },
+        err => {
+            if (err.status == 400) {
+              console.log("BAD REQUEST!");
+            } else if (err.status == 401) { 
+              console.log("password incorect!");
+            } else if (err.status == 404) { 
+              console.log("password or Username incorect!");
+            } else {
+              console.log(err)
+            }
+            reject(err);
+        })
+    })
+  }
 }

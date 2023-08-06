@@ -85,7 +85,6 @@ export class JadwalKalibrasiPage implements OnInit {
       this.roles = data.role
       this.token = data.access_token
     }
-   
   }
 
   async getAllData (){

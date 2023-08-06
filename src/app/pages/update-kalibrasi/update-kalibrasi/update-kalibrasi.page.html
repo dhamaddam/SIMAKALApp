@@ -72,7 +72,7 @@
               <ion-button type="submit" expand="full" color="success" shape="round" expand="block">Simpan</ion-button>
           </ion-col>
           <ion-col>
-              <ion-button expand="full" color="medium" shape="round">Kembali</ion-button>
+              <ion-button expand="full" color="medium" (click)="formClose()" shape="round">Kembali</ion-button>
           </ion-col>
       </ion-row>
     </ion-grid>
@@ -85,10 +85,27 @@
             <ng-container *ngSwitchCase='true' [ngTemplateOutlet]="show"></ng-container>
           </ng-container>
 
+          <ng-container [ngSwitch]="roles">
+            <ng-container *ngSwitchCase="'ADMIN'" [ngTemplateOutlet]="nameDefault"></ng-container>
+            <ng-container *ngSwitchCase="'KATIM'" [ngTemplateOutlet]="nameDefault"></ng-container>
+            <ng-container *ngSwitchCase="'INSTALASI'" [ngTemplateOutlet]="nameINSTALASI"></ng-container>
+            <ng-container *ngSwitchCase="'BPFK'" [ngTemplateOutlet]="nameBPFK"></ng-container>
+
+            <ng-template #nameDefault>
+              <ion-button expand="full" color="danger" shape="round" expand="block" (click)="sendNotificationBPFK()">Kirim Notifikasi BPFK</ion-button>
+            </ng-template>
+            <!-- nameINSTALASI -->
+            <ng-template #nameINSTALASI>
+              <ion-button expand="full" color="danger" shape="round" expand="block" (click)="sendNotificationADMIN()">Kirim Notifikasi ADMIN</ion-button>
+            </ng-template>
+
+            <ng-template #nameBPFK>
+            </ng-template>
+          </ng-container>
+
           <ng-template #hidden>
           </ng-template>
           <ng-template #show>
-            <ion-button expand="full" color="danger" shape="round" expand="block" (click)="sendNotificationBPFK()">Kirim Notifikasi BPFK</ion-button>
           </ng-template>
         </ion-col>
       </ion-row>

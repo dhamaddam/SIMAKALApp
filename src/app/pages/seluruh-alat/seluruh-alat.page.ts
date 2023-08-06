@@ -53,11 +53,23 @@ export class SeluruhAlatPage implements OnInit {
     this.getAllData()
   }
 
+
+  deleteItem(id : any ){
+    this.isLoading = true;
+    this.global.showLoader();
+    this.seluruhAlatServices.deleteAlat(id, this.token);
+    this.isLoading = false;
+    this.global.hideLoader();
+    this.getAllData()
+  }
+
+
   handleInstalasi(event : any) {
     let currentAlat = this._allAlatData
     currentAlat = currentAlat.filter(x => x.room == event.detail.value);
     this.allAlatData = currentAlat
   }
+
   handleRefresh(event : any) {
     setTimeout(() => {
       // Any calls to load data go here
@@ -73,6 +85,7 @@ export class SeluruhAlatPage implements OnInit {
       event.target.complete();
       }, 2000);
     }
+
   async getAuth(){
     const val = await this.authServices.getId();
     if(val){
@@ -88,10 +101,9 @@ export class SeluruhAlatPage implements OnInit {
     setTimeout(async() => {
       await this.seluruhAlatServices.getSeluruhAlatData(this.token);
       await this.seluruhAlatServices.getInstalasi();
-
-      this.isLoading = false;
-      this.global.hideLoader();
     }, 1000);
+    this.isLoading = false;
+    this.global.hideLoader();
   }
   ngOnDestroy() {
     if(this.allContentDummySub) this.allContentDummySub.unsubscribe();

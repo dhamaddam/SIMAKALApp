@@ -11,20 +11,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content  class="ion-padding">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-grid>
     <ng-container [ngSwitch]="roles" >
-      <ng-container *ngSwitchCase="'ADMIN'" [ngTemplateOutlet]="nameDefault"></ng-container>
-      <ng-container *ngSwitchCase="'KATIM'" [ngTemplateOutlet]="nameDefault"></ng-container>
-      <ng-container *ngSwitchCase="'BPFK'" [ngTemplateOutlet]="nameDefault"></ng-container>
+      <ng-container *ngSwitchCase="'ADMIN'" [ngTemplateOutlet]="nameDefaultRoles"></ng-container>
+      <ng-container *ngSwitchCase="'KATIM'" [ngTemplateOutlet]="nameDefaultRoles"></ng-container>
+      <ng-container *ngSwitchCase="'BPFK'" [ngTemplateOutlet]="nameDefaultRoles"></ng-container>
       
-      <ng-template #nameDefault>
+      <ng-template #nameDefaultRoles>
         <ion-row>
           <ion-col>
-            <ion-label class="ctm-font-2">Pilih Instalasi</ion-label>
+            <ion-label class="ctm-font">Pilih Instalasi</ion-label>
             <ion-list>
                 <ion-item>
                     <ion-select placeholder="Silahkan Masukkan Instalasi" (ionChange)="handleInstalasi($event)">
@@ -41,63 +41,75 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size ="2" >No</ion-col>
-      <ion-col>Alat</ion-col>
+      <ion-col size="2"> No</ion-col>
+      <ion-col> Alat</ion-col>
       <ion-col>Status</ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid >
-    <ion-row *ngFor="let row of allAlatData; index as i">
-      <ion-col size ="2">{{ i + 1 }}</ion-col>
-      <ion-col>
-        <ng-container [ngSwitch]="row?.owner_id" >
-          <ng-container *ngSwitchCase="'1'" [ngTemplateOutlet]="nameDefault"></ng-container>
-          <ng-container *ngSwitchDefault [ngTemplateOutlet]="kso"></ng-container>
-
-          <ng-template #nameDefault>
-            <ion-label size="small" color="dark"> {{ row?.name }}</ion-label>
-          </ng-template>
-
-          <ng-template #kso>
-            <ion-label size="small" color="primary"> {{ row?.name }}</ion-label>
-          </ng-template>
-        </ng-container>
-      </ion-col>
-      <ion-col>
-        <ng-container [ngSwitch]="row?.monitoring_status">
-          <ng-container *ngSwitchCase=null [ngTemplateOutlet]="default"></ng-container>
-          <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
-          <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
-          <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
-          <ng-container *ngSwitchCase='"selesai_perbaikan"' [ngTemplateOutlet]="selesaiPerbaikan"></ng-container>
-          <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
-        </ng-container>
-       
-        <ng-template #Danger>
-          <ion-button size="small" color="danger">Tdk Layak</ion-button>
-        </ng-template>
-        
-        <ng-template #sedangDalamPerbaikan>
-          <ion-button size="small" color="danger">Dalam Perbaikan</ion-button>
-        </ng-template>
-
-        <ng-template #masaWarning>
-          <ion-button size="small" color="warning">Menunggu Spare.</ion-button>
-        </ng-template>
-        <ng-template #siapPakai>
-          <ion-button size="small" color="success">Pakai</ion-button>
-        </ng-template>
-
-        <ng-template #default>
-          <ion-button size="small">Default</ion-button>
-        </ng-template>
-
-        <ng-template #selesaiPerbaikan>
-          <ion-button size="small" color="primary">Selesai Perb.</ion-button>
-        </ng-template>
-      </ion-col>
+    <ion-list>
+        <ion-item-sliding  *ngFor="let row of allAlatData; index as i">
+          <ion-item>
+            <ion-col size="2">{{ i + 1 }}</ion-col>
+            <ion-col >
+              <ng-container [ngSwitch]="row?.owner_id" >
+                <ng-container *ngSwitchCase="'1'" [ngTemplateOutlet]="nameDefaultRow"></ng-container>
+                <ng-container *ngSwitchDefault [ngTemplateOutlet]="kso"></ng-container>
       
-   </ion-row>
-  </ion-grid>
+                <ng-template #nameDefaultRow>
+                  <ion-label class="ctm-font" size="small" color="dark"> {{ row?.name }}</ion-label>
+                </ng-template>
+      
+                <ng-template #kso>
+                  <ion-label class="ctm-font" size="small" color="primary"> {{ row?.name }}</ion-label>
+                </ng-template>
+              </ng-container>
+            </ion-col>
+            <ion-col>
+              <ng-container [ngSwitch]="row?.monitoring_status">
+                <ng-container *ngSwitchCase=null [ngTemplateOutlet]="default"></ng-container>
+                <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
+                <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
+                <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
+                <ng-container *ngSwitchCase='"selesai_perbaikan"' [ngTemplateOutlet]="selesaiPerbaikan"></ng-container>
+                <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
+              </ng-container>
+             
+              <ng-template #Danger>
+                <ion-button size="small" class="ctm-font" color="danger">Tdk Layak</ion-button>
+              </ng-template>
+              
+              <ng-template #sedangDalamPerbaikan>
+                <ion-button size="small" class="ctm-font" color="danger">Dalam Perbaikan</ion-button>
+              </ng-template>
+      
+              <ng-template #masaWarning>
+                <ion-button size="small" class="ctm-font" color="warning">Menggu Spare.</ion-button>
+              </ng-template>
+              <ng-template #siapPakai>
+                <ion-button size="small" class="ctm-font" color="success">Pakai</ion-button>
+              </ng-template>
+      
+              <ng-template #default>
+                <ion-button size="small" class="ctm-font">Default</ion-button>
+              </ng-template>
+      
+              <ng-template #selesaiPerbaikan>
+                <ion-button size="small" color="primary" class="ctm-font">Selesai Perb.</ion-button>
+              </ng-template>
+            </ion-col>
+          </ion-item>
+
+          <ng-container [ngSwitch]="roles" >
+            <ng-container *ngSwitchCase="'ADMIN'" [ngTemplateOutlet]="nameDefault"></ng-container>
+  
+            <ng-template #nameDefault>
+              <ion-item-options side="end">
+                <ion-item-option color="danger" class="ctm-font" (click)="deleteItem(row?.id)" expandable>Delete</ion-item-option>
+              </ion-item-options>
+            </ng-template>
+          </ng-container>
+         
+      </ion-item-sliding>
+    </ion-list>
 
 </ion-content>

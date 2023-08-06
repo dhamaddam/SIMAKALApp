@@ -3,11 +3,15 @@ import { DatabaseService } from '../database.service';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { StorageService } from '../storage/storage.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
+
+  private _allDataDashboard = new BehaviorSubject<any>(null)
+
 
   constructor(
     private storage: StorageService,
@@ -61,6 +65,22 @@ export class DashboardService {
       throw(e)
     })
     await loading.dismiss();
+  }
+
+  get allDataDashboard(){
+    return this._allDataDashboard.asObservable();
+  }
+  
+  async getDataDashboard(token : string) {
+    try {
+      let getDataDashboard : any = this.DB.getDataDashboard(token).then(async (params : any) =>{
+        const data = JSON.parse(params)
+        await this._allDataDashboard.next(data.data)
+      } )
+    } catch (error){
+      console.log(error)
+      throw(error)
+    }
   }
 
   setUserData(uid : any) {

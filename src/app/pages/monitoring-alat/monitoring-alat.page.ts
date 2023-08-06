@@ -78,6 +78,8 @@ export class MonitoringAlatPage implements OnInit {
       }
     })
 
+    console.log("row?.details[0].month_diff",this.allAlatData)
+
     this.getAllData()
   }
 

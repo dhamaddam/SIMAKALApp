@@ -46,6 +46,18 @@ export class SeluruhAlatService {
       throw(error)
     }
   }
+  async deleteAlat(id : string, token: string){
+    try {
+      let deleteAlat : any = this.api.deleteAlatByID(id,token).then(async (params : any) =>{
+        const data = JSON.parse(params)
+        
+      })
+      console.log("deleteAlat",deleteAlat)
+    } catch (error) {
+      console.log(error)
+      throw(error)
+    }
+  }
 
   getContentDummy(){
     try {

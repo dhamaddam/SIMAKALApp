@@ -10,6 +10,8 @@ import { Alat } from 'src/app/models/alat.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Uploader, UploadWidgetConfig, UploadWidgetResult } from 'uploader';
 import { format } from 'date-fns'
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-input-alat-kesehatan',
@@ -41,7 +43,7 @@ export class InputAlatKesehatanPage implements OnInit {
     this.imageLink = files[0]?.fileUrl;
   };
 
-  //
+  //Certificate 
   uploaderCertificate = Uploader({ apiKey: "public_FW25bYRFasDp9zGButccP2qyeEcZ" });
   optionsCertificate: UploadWidgetConfig = {
     multi: true
@@ -49,10 +51,24 @@ export class InputAlatKesehatanPage implements OnInit {
   onCompleteCertificate = (files: UploadWidgetResult[]) => {
     this.certificateLink = files[0]?.fileUrl;
   };
+  
+
+  //Label
+  uploaderLabel = Uploader({ apiKey: "public_FW25bYRFasDp9zGButccP2qyeEcZ" });
+  optionsLabel: UploadWidgetConfig = {
+    multi: true
+  };
+  onCompleteLabel = (files:UploadWidgetResult[]) => {
+    this.labelLink = files[0]?.fileUrl
+  };
+
 
   imageLink: string  = "";
+  labelLink: string = "";
   certificateLink : string  = ""
   dateValue = format(new Date(), 'yyyy-MM-dd');
+
+ 
 
   constructor(
     private global : GlobalService, 
@@ -60,7 +76,7 @@ export class InputAlatKesehatanPage implements OnInit {
     private inputAlatKesehatanServices : InputAlatKesehatanService,
     private seluruhAlatServices : SeluruhAlatService,
     private authServices : AuthService,
-    
+    private router: Router, 
   ) { }
 
   ngOnInit() {
@@ -160,6 +176,13 @@ export class InputAlatKesehatanPage implements OnInit {
     } catch (error) {
       throw(error);
     }
+  }
+  formClose(){
+    this.router.navigate(['/menu/dashboard'], {
+      // queryParams: {
+      //   param: x
+      // }
+      });
   }
   async saveData(){
     this.isLoading = true;

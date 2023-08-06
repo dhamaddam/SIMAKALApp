@@ -55,6 +55,12 @@ export class MenuPage implements OnInit {
       icon: 'layers-outline'
     },
     {
+      title : 'Jadwal Kalibrasi',
+      description : "Lihat Seluruh Alat Terdaftar yang akan di jadwalkan kalibrasi" ,
+      url: '/menu/jadwal-kalibrasi',
+      icon: 'calendar-outline'
+    }, 
+    {
       title:'Monitoring Alat',
       description : 'Lihat Seluruh Alat  Rusak, Sedang Perbaikan, Selesai Perbaikan dan Gagal Perbaikan',
       url: '/menu/monitoring-alat',
@@ -69,12 +75,6 @@ export class MenuPage implements OnInit {
       url: '/menu/dashboard',
       icon: 'grid-outline'
     },
-    {
-      title : 'Jadwal Kalibrasi',
-      description : "Lihat Seluruh Alat Terdaftar yang akan di jadwalkan kalibrasi" ,
-      url: '/menu/jadwal-kalibrasi',
-      icon: 'calendar-outline'
-    }, 
     {
       title:'Monitoring Alat',
       description : 'Lihat Seluruh Alat  Rusak, Sedang Perbaikan, Selesai Perbaikan dan Gagal Perbaikan',
