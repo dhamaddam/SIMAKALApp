@@ -32,6 +32,10 @@ const routes: Routes = [
         path: 'generate-laporan',
         loadChildren: () => import('../generate-laporan/generate-laporan.module').then( m => m.GenerateLaporanPageModule)
       },
+      {
+        path: 'seluruh-alat-admin',
+        loadChildren:() => import('../seluruh-alat-admin/seluruh-alat-admin-routing.module').then(m => m.SeluruhAlatAdminPageRoutingModule)
+      }
     ]
   },
     {

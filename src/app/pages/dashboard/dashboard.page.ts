@@ -15,7 +15,9 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 export class DashboardPage implements AfterViewInit, OnInit {
 
   @ViewChild("persentaseKalibrasiCanvas") persentaseKalibrasiCanvas: any;
-  
+  @ViewChild("monitoringChartCanvas") monitoringChartCanvas : any;
+ 
+
   allpersentaseKalibrasiChartSub : Subscription = new Subscription;
   allCompositionChart : any[] = []
   allDataDashboard : any[] = [];
@@ -24,8 +26,29 @@ export class DashboardPage implements AfterViewInit, OnInit {
   isLoading: boolean = false;
 
   dataPercentage: any[] = []
+  dataMonitoring: any[] = []
 
   token : any;
+
+  CHART_COLORS = {
+    red: 'rgb(255, 99, 132)',
+    orange: 'rgb(255, 159, 64)',
+    yellow: 'rgb(255, 205, 86)',
+    green: 'rgb(75, 192, 192)',
+    blue: 'rgb(54, 162, 235)',
+    purple: 'rgb(153, 102, 255)',
+    grey: 'rgb(201, 203, 207)'
+  };
+  
+   NAMED_COLORS = [
+    this.CHART_COLORS.red,
+    this.CHART_COLORS.orange,
+    this.CHART_COLORS.yellow,
+    this.CHART_COLORS.green,
+    this.CHART_COLORS.blue,
+    this.CHART_COLORS.purple,
+    this.CHART_COLORS.grey,
+  ];
 
   constructor(
     public global : GlobalService,
@@ -37,12 +60,9 @@ export class DashboardPage implements AfterViewInit, OnInit {
   }
 
   doughnutChart: any;
+  monitoringChart : any;
 
   ngAfterViewInit() {
-    this.ComposisiChartMethod();
-  }
-  ngOnInit() {
-    this.check_login()
 
     this.allDataDashboardSub = this.DashboardService.allDataDashboard.subscribe(data => 
       {
@@ -51,8 +71,15 @@ export class DashboardPage implements AfterViewInit, OnInit {
         this.allDataDashboard = data;
         this.dataPercentage.push(data.percent_calibration_failed)
         this.dataPercentage.push(data.percent_calibration_succeed)
+        this.dataMonitoring.push(data.count_under_repair)
+        this.dataMonitoring.push(data.count_wait_sparepart)
+        this.dataMonitoring.push(data.count_repair_succeed)
+        this.dataMonitoring.push(data.count_repair_failed)
+        this.dataMonitoring.push(data.count_has_broken)
+        this.dataMonitoring.push(data.count_has_ready)
+
         this.ComposisiChartMethod();
-        // console.log("data",this.dataPercentage)
+        this.monitoringChartMethode();
       } else {
         this.allDataDashboard = this.allDataDashboard.concat(data);
       }
@@ -60,6 +87,11 @@ export class DashboardPage implements AfterViewInit, OnInit {
 
     this.getAllData()
 
+  }
+
+  
+  ngOnInit() {
+    this.check_login()
   }
 
   async getAllData (){
@@ -89,18 +121,16 @@ export class DashboardPage implements AfterViewInit, OnInit {
 
   ComposisiChartMethod() {
     let composition_area : number[] = []
-    let composition_label : any[] = []
 
     this.dataPercentage.forEach(data => {
       composition_area.push(data)
-      console.log("composition_area",composition_area)
     })
-    console.log("this.dataPercentage",this.dataPercentage)
-    if(!this.doughnutChart){
+
+   if(!this.doughnutChart){
       this.doughnutChart = new Chart(this.persentaseKalibrasiCanvas.nativeElement, {
         type: 'doughnut',
         data: {
-          labels: ["Alat terkalibrasi", "Alat Tidak Terkalibrasi"],
+          labels: ["Alat Tidak Terkalibrasi","Alat terkalibrasi"],
           datasets: [{
             label: 'of %',
             data: composition_area,
@@ -133,6 +163,51 @@ export class DashboardPage implements AfterViewInit, OnInit {
         },
       });
     } 
+  }
+
+  monitoringChartMethode(){
+
+    let monitoring_label : string[] = ["Sdg. Perbaikan","Tunggu Spar.","Sukses Perb.", "Gagal Perb.", "Rusak", "Siap Perb."]
+    let monitoring_data : number[] = []
+    // monitoring_data.
+    this.dataMonitoring.forEach(data => {
+      monitoring_data.push(data)
+    })
+    
+    if(!this.monitoringChart){
+      this.monitoringChart = new Chart(this.monitoringChartCanvas.nativeElement,
+        {
+          type: 'bar',
+          data: {
+            labels : monitoring_label,
+            datasets: [{
+              barPercentage: 1,
+              barThickness: 8,
+              minBarLength: 2,
+              label: 'Status Alat',
+              data: monitoring_data,
+              yAxisID: 'left-y-axis',
+              borderColor: 'rgb(255, 99, 132)',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          
+            },
+          ]
+          }, 
+          options: {
+            plugins : {
+              legend : {
+                labels : {
+                  boxWidth : 10,
+                  font : {
+                    size : 10,
+                  },
+                },
+                display : true,
+              }
+            },
+          }
+        }); 
+    }
   }
 
   logout(){

@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GlobalService } from 'src/app/services/global/global.service';
 import { SeluruhAlatService } from 'src/app/services/seluruh-alat/seluruh-alat.service';
 
 @Component({
-  selector: 'app-seluruh-alat',
-  templateUrl: './seluruh-alat.page.html',
-  styleUrls: ['./seluruh-alat.page.scss'],
+  selector: 'app-seluruh-alat-admin',
+  templateUrl: './seluruh-alat-admin.page.html',
+  styleUrls: ['./seluruh-alat-admin.page.scss'],
 })
-export class SeluruhAlatPage implements OnInit {
+export class SeluruhAlatAdminPage implements OnInit {
 
   formTitle = "Seluruh Alat"
   allContentDummy : any[] = [];
@@ -23,7 +23,7 @@ export class SeluruhAlatPage implements OnInit {
   roles : any;
   allInstalasi : any[] = [];
   allInstalasiSubs: Subscription = new Subscription;
-  
+
   constructor(
     private global : GlobalService,
     private seluruhAlatServices : SeluruhAlatService,
@@ -41,7 +41,6 @@ export class SeluruhAlatPage implements OnInit {
       }
     })
 
-    
     this.allAlatDataSub = this.seluruhAlatServices.allDataAlatKesehatan.subscribe(data => {
       if (data instanceof Array){
         this.allAlatData = data;
@@ -52,8 +51,7 @@ export class SeluruhAlatPage implements OnInit {
     })
     this.getAllData()
   }
-
-
+  
   deleteItem(id : any ){
     this.isLoading = true;
     this.global.showLoader();
@@ -62,7 +60,6 @@ export class SeluruhAlatPage implements OnInit {
     this.global.hideLoader();
     this.getAllData()
   }
-
 
   handleInstalasi(event : any) {
     let currentAlat = this._allAlatData

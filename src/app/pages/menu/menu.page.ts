@@ -41,7 +41,7 @@ export class MenuPage implements OnInit {
     {
       title:'Lihat Seluruh Alat',
       description : "Laporan Berupa Grafik Persentase Keberhasilan  kalibrasi alat",
-      url: '/menu/seluruh-alat',
+      url: '/menu/seluruh-alat-admin',
       icon: 'layers-outline'
     },
 

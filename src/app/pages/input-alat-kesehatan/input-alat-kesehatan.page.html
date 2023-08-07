@@ -252,10 +252,6 @@
         <ion-col>
             <ion-label class="ctm-font-2">Label</ion-label>
             <ion-item>
-              <ion-input type="text" formControlName="label"></ion-input>
-
-            </ion-item>
-            <ion-item>
               <a href="{{ labelLink }}" target="_blank">{{ labelLink }}</a>
               <button uploadButton [uploadComplete]="onCompleteLabel" [uploadOptions]="optionsLabel" [uploader]="uploaderLabel" >
                 Upload a file...

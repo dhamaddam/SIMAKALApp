@@ -63,6 +63,10 @@ const routes: Routes = [
     path: 'update-kalibrasi',
     loadChildren: () => import('./pages/update-kalibrasi/update-kalibrasi/update-kalibrasi.module').then( m => m.UpdateKalibrasiPageModule)
   },
+  {
+    path: 'seluruh-alat-admin',
+    loadChildren: () => import('./pages/seluruh-alat-admin/seluruh-alat-admin.module').then( m => m.SeluruhAlatAdminPageModule)
+  },
 ];
 
 @NgModule({
