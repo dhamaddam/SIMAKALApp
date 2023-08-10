@@ -169,7 +169,7 @@ export class DashboardPage implements AfterViewInit, OnInit {
 
     let monitoring_label : string[] = ["Sdg. Perbaikan","Tunggu Spar.","Sukses Perb.", "Gagal Perb.", "Rusak", "Siap Perb."]
     let monitoring_data : number[] = []
-    // monitoring_data.
+    
     this.dataMonitoring.forEach(data => {
       monitoring_data.push(data)
     })

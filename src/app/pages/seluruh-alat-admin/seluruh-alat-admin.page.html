@@ -69,6 +69,7 @@
                 <ng-container *ngSwitchCase=null [ngTemplateOutlet]="default"></ng-container>
                 <ng-container *ngSwitchCase='"menunggu_sparepart"' [ngTemplateOutlet]="masaWarning"></ng-container>
                 <ng-container *ngSwitchCase='"layak_pakai"' [ngTemplateOutlet]="siapPakai"></ng-container>
+                <ng-container *ngSwitchCase='"rusak"' [ngTemplateOutlet]="rusak"></ng-container>
                 <ng-container *ngSwitchCase='"sedang_dalam_perbaikan"' [ngTemplateOutlet]="sedangDalamPerbaikan"></ng-container>
                 <ng-container *ngSwitchCase='"selesai_perbaikan"' [ngTemplateOutlet]="selesaiPerbaikan"></ng-container>
                 <ng-container *ngSwitchCase='"gagal_perbaikan"' [ngTemplateOutlet]="Danger"></ng-container>
@@ -76,6 +77,10 @@
              
               <ng-template #Danger>
                 <ion-button size="small" class="ctm-font" color="danger">Tdk Layak</ion-button>
+              </ng-template>
+
+              <ng-template #rusak>
+                <ion-button size="small" class="ctm-font" color="danger">Rusak</ion-button>
               </ng-template>
               
               <ng-template #sedangDalamPerbaikan>

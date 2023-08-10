@@ -49,6 +49,12 @@ export class MenuPage implements OnInit {
 
   pages_instalasi = [
     {
+      title : 'Dashboard',
+      description : "Tampilan Utama Halaman Utama",
+      url: '/menu/dashboard',
+      icon: 'grid-outline'
+    },
+    {
       title:'Lihat Seluruh Alat',
       description : "Laporan Berupa Grafik Persentase Keberhasilan  kalibrasi alat",
       url: '/menu/seluruh-alat',
@@ -96,6 +102,12 @@ export class MenuPage implements OnInit {
   ];
 
   pages_bpfk = [
+    {
+      title : 'Dashboard',
+      description : "Tampilan Utama Halaman Utama",
+      url: '/menu/dashboard',
+      icon: 'grid-outline'
+    }, 
     {
       title : 'Jadwal Kalibrasi',
       description : "Lihat Seluruh Alat Terdaftar yang akan di jadwalkan kalibrasi" ,
